@@ -1,4 +1,7 @@
 import "./assets/App.css";
+import React from "react";
+import { Button } from "@material-ui/core";
+
 // import create from "zustand";
 
 function App() {
@@ -6,7 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <Button color="secondary">Press me!</Button>
         </p>
       </header>
     </div>
