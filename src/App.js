@@ -4,22 +4,11 @@ import { Button } from "@material-ui/core";
 import MenuHeader from "./views/header";
 import Admin from "./views/admin.js";
 
-import { Route, Switch } from "react-router";
+import { Route, Switch } from "react-router-dom";
 import SignUpPage from "./views/signup";
 import LoginPage from "./views/login";
-import { BrowserRouter } from "react-router-dom";
 
-const Routes = () => {
-  return (
-  <BrowserRouter>
-  <Switch>
-  <Route exact path="/admin" component={Admin}/>
-  <Route exact path="/signup" component={SignUpPage}/>
-  <Route exact path="/login" component={LoginPage}/>
-</Switch>
-</BrowserRouter>
-  )
-}
+
 
 function App() {
   return (
@@ -27,7 +16,11 @@ function App() {
       
       <header className="App-header">
         <MenuHeader />
-        <Routes/>
+        <Switch>
+        <Route exact path="/admin" component={Admin}/>
+        <Route exact path="/signup" component={SignUpPage}/>
+        <Route exact path="/login" component={LoginPage}/>
+   </Switch>
         <p>
           <Button color="secondary">Press me!</Button>
         </p>

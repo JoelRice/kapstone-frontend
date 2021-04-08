@@ -132,7 +132,7 @@ export default function MenuHeader(props) {
         >
           <LinkTab label="Adoptions"   />
           <LinkTab label="Shop Items"  />
-          <LinkTab label="Sign Up" to="/signup"/>
+          <LinkTab label="Sign Up" to="signup"/>
           <LinkTab label="Login" />
         </Tabs>
         </div>
