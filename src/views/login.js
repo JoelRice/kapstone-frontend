@@ -1,18 +1,28 @@
-import { Box, Container, Button, TextField, FormControlLabel, Link, Grid, Typography, Checkbox } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  Button,
+  TextField,
+  FormControlLabel,
+  Link,
+  Grid,
+  Typography,
+  Checkbox,
+} from "@material-ui/core";
 import React from "react";
-import {useState} from "react"
+import { useState } from "react";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(2),
   },
   submit: {
@@ -22,23 +32,23 @@ const useStyles = makeStyles((theme) => ({
   heading1: {
     marginTop: theme.spacing(2),
     paddingTop: theme.spacing(4),
-    color: theme.palette.info.main, 
-  }
-
+    color: theme.palette.info.main,
+  },
 }));
-
 
 export default function LoginPage(props) {
   const classes = useStyles();
 
-
   return (
-    <div> 
-      <Container component="main" style={{ backgroundColor: '#cfe8fc', height: '500px', width: '500px', }}> 
-      <Typography className={classes.heading1} component="h1" variant="h2">
+    <div>
+      <Container
+        component="main"
+        style={{ backgroundColor: "#cfe8fc", height: "500px", width: "500px" }}
+      >
+        <Typography className={classes.heading1} component="h1" variant="h2">
           Sign in
         </Typography>
-      <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -83,7 +93,7 @@ export default function LoginPage(props) {
             </Grid>
           </Grid>
         </form>
-        </Container>
+      </Container>
     </div>
-  )
+  );
 }
