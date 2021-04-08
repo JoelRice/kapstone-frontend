@@ -1,10 +1,14 @@
 import React from "react";
+import {useState} from "react"
 
-import { Menu, MenuItem, AppBar, Toolbar, IconButton, Typography, InputBase, MenuIcon, SearchIcon } from '@material-ui/core';
+import { Menu, MenuItem, AppBar, Toolbar, Typography, InputBase, IconButton } from '@material-ui/core';
+import { Tabs, Tab, Box} from '@material-ui/core'
 import { fade, makeStyles } from '@material-ui/core/styles';
+import SearchIcon from "@material-ui/icons/Search"
+import MenuIcon from '@material-ui/icons/Menu';
 
-// 
-
+//styling for this header is below
+//
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -60,11 +64,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function LinkTab(props) {
+  return (
+    <Tab
+      component="a"
+      onClick={(event) => {
+        event.preventDefault();
+      }}
+      {...props}
+    />
+  );
+}
 
 export default function MenuHeader(props) {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
   const classes = useStyles();
 
-  return ( <div className={classes.root}>
+  return ( 
+  <div className={classes.root}>
     <AppBar position="static">
       <Toolbar>
         <IconButton
@@ -72,12 +99,37 @@ export default function MenuHeader(props) {
           className={classes.menuButton}
           color="inherit"
           aria-label="open drawer"
+          onClick={handleClick}
         >
           <MenuIcon />
         </IconButton>
+          <Menu
+        id="website-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>Trade Requests</MenuItem>
+        <MenuItem onClick={handleClose}>My Inventory</MenuItem>
+        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
+
         <Typography className={classes.title} variant="h6" noWrap>
-          Material-UI
+          KittyBay
         </Typography>
+        <div className="navigation">
+        <Tabs
+          variant="fullWidth"
+        >
+          <LinkTab label="Shop Adoptions"   />
+          <LinkTab label="Shop Items"  />
+          <LinkTab label="Sign Up" />
+          <LinkTab label="Login" />
+        </Tabs>
+        </div>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
@@ -97,5 +149,3 @@ export default function MenuHeader(props) {
 
   )
 }
-
-
