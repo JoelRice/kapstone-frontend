@@ -3,6 +3,8 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import { Switch, Route } from "react-router-dom";
 import Admin from "./views/admin.js";
+import MenuHeader from "./views/header";
+
 // import create from "zustand";
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
         <Route exact path="/admin" component={Admin} />
       </Switch>
       <header className="App-header">
+        <MenuHeader />
         <p>
           <Button variant="outlined" color="primary">
             Press me!
