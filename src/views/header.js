@@ -6,6 +6,11 @@ import { Tabs, Tab, Box} from '@material-ui/core'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from "@material-ui/icons/Search"
 import MenuIcon from '@material-ui/icons/Menu';
+import { Route, Switch } from "react-router";
+import SignUpPage from "./signup";
+import LoginPage from "./login";
+import Admin from "./admin"
+import { BrowserRouter } from "react-router-dom";
 
 //styling for this header is below
 //
@@ -121,28 +126,17 @@ export default function MenuHeader(props) {
           KittyBay
         </Typography>
         <div className="navigation">
+          
         <Tabs
           variant="fullWidth"
         >
-          <LinkTab label="Shop Adoptions"   />
+          <LinkTab label="Adoptions"   />
           <LinkTab label="Shop Items"  />
-          <LinkTab label="Sign Up" />
+          <LinkTab label="Sign Up" to="/signup"/>
           <LinkTab label="Login" />
         </Tabs>
         </div>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </div>
+        
       </Toolbar>
     </AppBar>
   </div>
