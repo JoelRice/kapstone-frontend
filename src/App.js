@@ -1,9 +1,9 @@
 import "./assets/styles/App.css";
 import React from "react";
 import { Button } from "@material-ui/core";
-import { Switch, Route } from "react-router-dom";
-import Admin from "./views/admin.js";
 import MenuHeader from "./views/header";
+import Admin from "./views/admin.js";
+import { Switch, Route } from "react-router-dom";
 
 // import create from "zustand";
 

@@ -1,5 +1,6 @@
 //This is not our current baseURL. It is just here as a place holder.*needs updated with new API
-export const baseURL = "https://socialapp-api.herokuapp.com/";
+//Will either be localhost:3000 or https://subdued-fog-mouth.glitch.me/
+export const baseURL = "localhost:3000";
 
 //Login Fetch Request *needs updated with new API
 export const loginRequest = (username, password) => {
@@ -19,7 +20,9 @@ export const loginRequest = (username, password) => {
 //Logout Fetch Request *needs updated with new API
 export const logoutRequest = (token) => {
   return fetch(baseURL + "auth/logout", {
-    headers: { Authorization: "Bearer " + token },
+    body: {
+      token: token,
+    },
   })
     .then((res) => res.json())
     .then((res) => {
