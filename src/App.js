@@ -1,4 +1,4 @@
-import "./assets/App.css";
+import "./assets/styles/App.css";
 import React from "react";
 import { Button } from "@material-ui/core";
 import MenuHeader from "./views/header";
@@ -8,12 +8,12 @@ import { Route, Switch } from "react-router-dom";
 import SignUpPage from "./views/signup";
 import LoginPage from "./views/login";
 
+// import create from "zustand";
 
 
 function App() {
   return (
     <div className="App">
-      
       <header className="App-header">
         <MenuHeader />
         <Switch>
@@ -22,7 +22,9 @@ function App() {
         <Route exact path="/login" component={LoginPage}/>
    </Switch>
         <p>
-          <Button color="secondary">Press me!</Button>
+          <Button variant="outlined" color="primary">
+            Press me!
+          </Button>
         </p>
       </header>
     </div>

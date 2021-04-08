@@ -1,9 +1,19 @@
-import { Box, Container, Button, TextField, FormControlLabel, Link, Grid, Typography, Checkbox } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  Button,
+  TextField,
+  FormControlLabel,
+  Link,
+  Grid,
+  Typography,
+  Checkbox,
+} from "@material-ui/core";
 import React from "react";
-import {useState} from "react"
-import CssBaseline from '@material-ui/core/CssBaseline';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
+import { useState } from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { Routes } from "../App"
 
@@ -11,13 +21,13 @@ import { Routes } from "../App"
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
-  
+
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(2),
   },
   submit: {
@@ -27,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   heading1: {
     marginTop: theme.spacing(1),
     paddingTop: theme.spacing(1),
-    color: theme.palette.info.main, 
+    color: theme.palette.info.main,
   },
 }));
 
@@ -39,7 +49,6 @@ export default function SignUpPage() {
       
       <CssBaseline />
       <div className={classes.paper}>
-        
         <Typography className={classes.heading1} component="h1" variant="h2">
           Sign up
         </Typography>
@@ -83,7 +92,6 @@ export default function SignUpPage() {
                 autoComplete="current-password"
               />
             </Grid>
-            
           </Grid>
           <Button
             type="submit"
@@ -106,4 +114,3 @@ export default function SignUpPage() {
     </Container>
   );
 }
-
