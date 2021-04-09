@@ -4,6 +4,8 @@
 import React from "react";
 import {Button} from "@material-ui/core";
 
+
+
 function Admin(){
     return (
         <form>
@@ -11,12 +13,12 @@ function Admin(){
             <h1>Admin Page</h1>
                 <div className="form">
                     <input type="text" name="name" id="name"/>
-                    <Button>Name</Button>
                     <input type="text" name="stats" id="stats"/>
-                    <Button>Stats</Button>
-                  <div>
                     <input type="text" name="url" id="url"/>
-                    <Button>Picture</Button>
+                  <div className="buttons">
+                    <Button color="default">Name</Button>
+                    <Button color="default">Stats</Button>
+                    <Button color="default">Picture</Button>
                   </div>  
                 </div>
             </div>
