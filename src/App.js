@@ -1,25 +1,32 @@
-import "./assets/styles/App.css";
+
 import React from "react";
 import { Button } from "@material-ui/core";
 import MenuHeader from "./views/header";
 import Admin from "./views/admin.js";
-import { Switch, Route } from "react-router-dom";
 
-// import create from "zustand";
+import { Route, Switch } from "react-router-dom";
+import SignUpPage from "./views/signup";
+import LoginPage from "./views/login";
+
+
 
 function App() {
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/admin" component={Admin} />
-      </Switch>
+      
       <header className="App-header">
-        <MenuHeader />
-        <p>
-          <Button variant="outlined" color="primary">
-            Press me!
-          </Button>
-        </p>
+        <Route path="/:page?" render={(history) => {
+          return (
+            <MenuHeader  {...history}/>
+            )
+        }}
+        />
+        <Switch>
+        <Route exact path="/admin" component={Admin}/>
+        <Route exact path="/signup" component={SignUpPage}/>
+        <Route exact path="/login" component={LoginPage}/>
+        </Switch>
+
       </header>
     </div>
   );

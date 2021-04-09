@@ -1,11 +1,17 @@
 import React from "react";
 import {useState} from "react"
 
-import { Menu, MenuItem, AppBar, Toolbar, Typography, InputBase, IconButton } from '@material-ui/core';
+import { Menu, MenuItem, AppBar, Toolbar, Typography, InputBase, IconButton, Link } from '@material-ui/core';
 import { Tabs, Tab, Box} from '@material-ui/core'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from "@material-ui/icons/Search"
 import MenuIcon from '@material-ui/icons/Menu';
+
+import { Route, Switch } from "react-router";
+import SignUpPage from "./signup";
+import LoginPage from "./login";
+import Admin from "./admin"
+import { BrowserRouter } from "react-router-dom";
 
 //styling for this header is below
 //
@@ -23,61 +29,29 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   inputRoot: {
     color: 'inherit',
   },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
 }));
 
-function LinkTab(props) {
-  return (
-    <Tab
-      component="a"
-      onClick={(event) => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
-}
 
 export default function MenuHeader(props) {
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const { match , history } = props;
+  const { params } = match;
+  const { page } = params;
+  
+  const indexToTabName = {
+    0: "adoption",
+    1: "shop",
+    2: "signup",
+    3: "login",
+  };
+
+
+  const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -87,6 +61,11 @@ export default function MenuHeader(props) {
     setAnchorEl(null);
   };
 
+  const handleChange = (event, newValue) => {
+    const linkPath = indexToTabName[newValue]
+    history.push(linkPath);
+    setSelectedTab(newValue);
+  };
 
   const classes = useStyles();
 
@@ -120,29 +99,21 @@ export default function MenuHeader(props) {
         <Typography className={classes.title} variant="h6" noWrap>
           KittyBay
         </Typography>
+
         <div className="navigation">
+          
         <Tabs
           variant="fullWidth"
+          value={selectedTab}
+          onChange={handleChange}
         >
-          <LinkTab label="Shop Adoptions"   />
-          <LinkTab label="Shop Items"  />
-          <LinkTab label="Sign Up" />
-          <LinkTab label="Login" />
+          <Tab label="Adoptions" component={Link} />
+          <Tab label="Shop Items" component={Link}  />
+          <Tab label="Sign Up" component={Link} />
+          <Tab label="Login" component={Link}/>
         </Tabs>
         </div>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </div>
+        
       </Toolbar>
     </AppBar>
   </div>
