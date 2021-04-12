@@ -6,7 +6,6 @@ const initialState = {
   token: "",
   toast: {
     text: "",
-    statusCode: 0,
     color: "",
     //still need to sort out how colors work here
     //   color/statusCode/whatever: ''
@@ -20,10 +19,10 @@ export const actions = {
   UNTOAST: "UNTOAST",
 };
 
-const toastFor = (action, successMessage, successCode = 0) => ({
-  message: action.payload?.message || successMessage,
-  statusCode: action.payload?.statusCode || successCode,
-});
+// const toastFor = (action, successMessage, successColor = "") => ({
+//   message: action.payload?.message || successMessage,
+//   color: action.payload?.color || successColor,
+// });
 
 // define reducer function
 const reducer = (state, action) => {
@@ -31,15 +30,10 @@ const reducer = (state, action) => {
     case actions.LOGIN:
       return {
         user: action.payload,
-        toast: toastFor(
-          action,
-          `Successfully logged in as ${action.payload.username}`
-        ),
       };
     case actions.LOGOUT:
       return {
         user: initialState.user,
-        toast: toastFor(action, "Log out successful", 200),
       };
     case actions.TOAST:
       return { toast: { ...state.toast, ...action.payload } };

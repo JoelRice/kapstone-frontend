@@ -1,10 +1,10 @@
 //This is not our current baseURL. It is just here as a place holder.*needs updated with new API
-//Will either be localhost:3000 or https://subdued-fog-mouth.glitch.me/
-export const baseURL = "localhost:3000";
+//Will either be localhost:3000 or https://subdued-fog-mouth.glitch.me
+export const baseURL = "http://localhost:3000";
 
 //Login Fetch Request *needs updated with new API
 export const loginRequest = (username, password) => {
-  return fetch(`${baseURL}auth/login`, {
+  return fetch(`${baseURL}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -18,9 +18,17 @@ export const loginRequest = (username, password) => {
     });
 };
 
+//
 export const logoutRequest = (token) => {
-  return fetch(`${baseURL}auth/logout`, {
-    headers: { Authorization: `Bearer ${token}` },
+  return fetch(`${baseURL}/auth/logout`, {
+    method: "POST",
+    headers: {
+      // Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+    }),
   })
     .then((res) => res.json())
     .then((res) => {
@@ -29,7 +37,7 @@ export const logoutRequest = (token) => {
 };
 
 export const createAccount = (username, password) => {
-  return fetch(`${baseURL}auth/account`, {
+  return fetch(`${baseURL}/auth/account`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -43,10 +51,15 @@ export const createAccount = (username, password) => {
     });
 };
 
+// Authorization: `Bearer ${token}`
 export const deleteAccount = (token, password) => {
-  return fetch(`${baseURL}users/${password}`, {
+  return fetch(`${baseURL}/auth/account`, {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+      password,
+    }),
   })
     .then((res) => res.json())
     .then((res) => {
