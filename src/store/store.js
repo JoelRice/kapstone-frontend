@@ -29,7 +29,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case actions.LOGIN:
       return {
-        user: action.payload,
+        token: action.payload,
       };
     case actions.LOGOUT:
       return {

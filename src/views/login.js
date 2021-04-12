@@ -11,6 +11,8 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
+import { useStore, actions } from "../store/store";
+import { loginRequest } from "../fetchRequests";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -39,6 +41,27 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginPage(props) {
   const classes = useStyles();
 
+  const [form, setForm] = useState({ username: "", password: "" });
+  const dispatch = useStore((state) => state.dispatch);
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const username = event.currentTarget.username.value;
+    const password = event.currentTarget.password.value;
+    loginRequest(username, password)
+      .then((res) => {
+        if (res.error) {
+          setForm({ username: "", password: "" });
+          dispatch({ type: actions.TOAST, payload: { text: res.error, color: "#EF3823" } });
+        }
+        else {
+          dispatch({ type: actions.TOAST, payload: { text: res.message, color: "#4BCC63" } });
+          dispatch({ type: actions.LOGIN, payload: res.token });
+          // TODO: redirect to homepage
+        }
+      });
+  };
+
   return (
     <div>
       <Container
@@ -48,7 +71,7 @@ export default function LoginPage(props) {
         <Typography className={classes.heading1} component="h1" variant="h2">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -59,6 +82,8 @@ export default function LoginPage(props) {
             name="username"
             autoComplete="username"
             autoFocus
+            value={form.username}
+            onChange={(event) => setForm((prev) => ({ ...prev, username: event.target.value }))}
           />
           <TextField
             variant="outlined"
@@ -70,6 +95,8 @@ export default function LoginPage(props) {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={form.password}
+            onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))}
           />
           <Button
             type="submit"

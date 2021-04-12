@@ -6,12 +6,12 @@ import "../assets/styles/toast.css";
 const Toast = () => {
   const dispatch = useStore((state) => state.dispatch);
   const toast = useStore((state) => state.toast);
-  const fadeClass = toast?.message ? "toast-show" : "";
-
+  const fadeClass = toast?.text ? "toast-show" : "";
+  
   // When the toast state changes
   useEffect(() => {
     let anim = null;
-    if (toast.message) {
+    if (toast.text) {
       anim = setTimeout(() => dispatch({ type: actions.UNTOAST }), 2000);
     }
 
@@ -21,8 +21,8 @@ const Toast = () => {
   }, [dispatch, toast]);
 
   return (
-    <div className={`toast toast-${toast.statusCode} ${fadeClass}`}>
-      <p>{toast.message}</p>
+    <div style={{ backgroundColor: toast.color }} className={`toast ${fadeClass}`}>
+      <p>{toast.text}</p>
     </div>
   );
 };

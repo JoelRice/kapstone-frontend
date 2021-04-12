@@ -30,24 +30,3 @@
   background-color: #ffffff; /* default color */
   transition: opacity 1000ms, background-color, 1000ms, visibility 0ms;
 }
-
-/* make custom colors for other error codes here */
-.toast-400 {
-  background-color: #f35752;
-}
-
-.toast-200 {
-  background-color: #5dd45f;
-}
-
-.toast-1 {
-  background-color: #72afd3;
-}
-
-.toast-2 {
-  background-color: #d18451;
-}
-
-.toast-413 {
-  background-color: brown;
-}
