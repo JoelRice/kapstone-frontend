@@ -51,11 +51,11 @@ export const createAccount = (username, password) => {
     });
 };
 
-// Authorization: `Bearer ${token}`
 export const deleteAccount = (token, password) => {
   return fetch(`${baseURL}/auth/account`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
+    // Authorization: `Bearer ${token}`,
     body: JSON.stringify({
       token,
       password,
@@ -66,3 +66,12 @@ export const deleteAccount = (token, password) => {
       return res;
     });
 };
+
+export const getAccountInfo = (token) =>
+  fetch(`${baseURL}/auth/account`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+    }),
+  }).then((res) => res.json());

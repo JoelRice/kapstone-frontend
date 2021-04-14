@@ -14,9 +14,10 @@ import { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { Routes } from "../App"
-
+import { createAccount } from "../fetchRequests";
+import { useStore, actions } from "../store/store";
+import { Routes } from "../App";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,16 +44,48 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUpPage() {
   const classes = useStyles();
+  const history = useHistory();
+  const [form, setForm] = useState({ username: "", password: "" });
+  const dispatch = useStore((state) => state.dispatch);
 
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const username = event.currentTarget.username.value;
+    const password = event.currentTarget.password.value;
+    createAccount(username, password)
+      .then((res) => {
+        if (res.error) {
+          setForm({ username: "", password: "" });
+          dispatch({
+            type: actions.TOAST,
+            payload: { text: res.error, color: "#EF3823" },
+          });
+        } else {
+          dispatch({
+            type: actions.TOAST,
+            payload: { text: res.message, color: "#4BCC63" },
+          });
+          dispatch({ type: actions.LOGIN, payload: res.token });
+        }
+      })
+      .then(history.push("/login"));
+  };
+  const handleChange = (event) => {
+    setForm((state) => ({ ...state, [event.target.name]: event.target.value }));
+  };
   return (
-    <Container component="main" maxWidth="xs"component="main" style={{ backgroundColor: '#cfe8fc', height: '500px', width: '500px', }}>
-      
+    <Container
+      component="main"
+      maxWidth="xs"
+      component="main"
+      style={{ backgroundColor: "#cfe8fc", height: "500px", width: "500px" }}
+    >
       <CssBaseline />
       <div className={classes.paper}>
         <Typography className={classes.heading1} component="h1" variant="h2">
-          Sign up
+          Sign Up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSignUp}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -64,9 +97,12 @@ export default function SignUpPage() {
                 id="username"
                 label="User Name"
                 autoFocus
+                onChange={(event) =>
+                  setForm((prev) => ({ ...prev, username: event.target.value }))
+                }
               />
             </Grid>
-            
+
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -77,9 +113,12 @@ export default function SignUpPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(event) =>
+                  setForm((prev) => ({ ...prev, password: event.target.value }))
+                }
               />
             </Grid>
-            
+
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -90,6 +129,9 @@ export default function SignUpPage() {
                 type="confirmpassword"
                 id="confirmpassword"
                 autoComplete="current-password"
+                onChange={(event) =>
+                  setForm((prev) => ({ ...prev, password: event.target.value }))
+                }
               />
             </Grid>
           </Grid>
@@ -99,13 +141,14 @@ export default function SignUpPage() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onChange={handleChange}
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="login" variant="body2">
-                Already have an account? Sign in
+                Already have an account? Log In
               </Link>
             </Grid>
           </Grid>

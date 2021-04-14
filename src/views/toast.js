@@ -7,7 +7,7 @@ const Toast = () => {
   const dispatch = useStore((state) => state.dispatch);
   const toast = useStore((state) => state.toast);
   const fadeClass = toast?.text ? "toast-show" : "";
-  
+
   // When the toast state changes
   useEffect(() => {
     let anim = null;
@@ -21,7 +21,10 @@ const Toast = () => {
   }, [dispatch, toast]);
 
   return (
-    <div style={{ backgroundColor: toast.color }} className={`toast ${fadeClass}`}>
+    <div
+      style={{ backgroundColor: toast.color }}
+      className={`toast ${fadeClass}`}
+    >
       <p>{toast.text}</p>
     </div>
   );
