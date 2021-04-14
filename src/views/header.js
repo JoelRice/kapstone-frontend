@@ -83,7 +83,7 @@ export default function MenuHeader(props) {
     event.preventDefault();
     logoutRequest(token).then((res) => {
       if (res.error) {
-        dispatch({ token: "" });
+        dispatch({ type: actions.LOGOUT });
         dispatch({
           type: actions.TOAST,
           payload: { text: res.error, color: "#EF3823" },
