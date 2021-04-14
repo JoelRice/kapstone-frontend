@@ -80,13 +80,22 @@ export default function MenuHeader(props) {
   //TODO: Get Toast response
   //to work for Logout successful
   const handleLogout = (event) => {
+    event.preventDefault();
     logoutRequest(token).then((res) => {
-      history.push("/login");
-      dispatch({ type: "LOGOUT" });
-      dispatch({
-        type: actions.TOAST,
-        payload: { text: res.message, color: "#4BCC63" },
-      });
+      if (res.error) {
+        dispatch({ token: "" });
+        dispatch({
+          type: actions.TOAST,
+          payload: { text: res.error, color: "#EF3823" },
+        });
+      } else {
+        history.push("/login");
+        dispatch({ type: "LOGOUT" });
+        dispatch({
+          type: actions.TOAST,
+          payload: { text: res.message, color: "#4BCC63" },
+        });
+      }
     });
   };
 
