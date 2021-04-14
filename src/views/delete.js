@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useStore, actions } from "../store/store";
-import { loginRequest } from "../apis/fetchRequests";
+import { deleteAccount, loginRequest } from "../apis/fetchRequests";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -38,36 +38,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginPage() {
+export default function DeleteAccount() {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useStore((state) => state.dispatch);
-  const [form, setForm] = useState({ username: "", password: "" });
+  const token = useStore((state) => state.token);
+  const [form, setForm] = useState({ password: "" });
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const username = event.currentTarget.username.value;
+  const handleDelete = (event) => {
     const password = event.currentTarget.password.value;
-    loginRequest(username, password)
+    event.preventDefault();
+    deleteAccount(token, password)
       .then((res) => {
         if (res.error) {
-          setForm({ username: "", password: "" });
+          setForm({ password: "" });
           dispatch({
             type: actions.TOAST,
             payload: { text: res.error, color: "#EF3823" },
           });
         } else {
           dispatch({
+            type: actions.LOGOUT,
+          });
+          dispatch({
             type: actions.TOAST,
             payload: { text: res.message, color: "#4BCC63" },
           });
-          dispatch({
-            type: actions.LOGIN,
-            payload: res.token,
-          });
         }
       })
-      .then(history.push("/"));
+      .then(history.push("/login"));
   };
 
   const handleChange = (event) => {
@@ -81,24 +80,9 @@ export default function LoginPage() {
         style={{ backgroundColor: "#cfe8fc", height: "500px", width: "500px" }}
       >
         <Typography className={classes.heading1} component="h1" variant="h2">
-          Log In
+          Delete Account
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleLogin}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="User Name"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            value={form.username}
-            onChange={(event) =>
-              setForm((prev) => ({ ...prev, username: event.target.value }))
-            }
-          />
+        <form className={classes.form} noValidate onSubmit={handleDelete}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -122,14 +106,10 @@ export default function LoginPage() {
             className={classes.submit}
             onChange={handleChange}
           >
-            Sign In
+            Delete Account
           </Button>
           <Grid container>
-            <Grid item>
-              <Link href="signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
+            <Grid item></Grid>
           </Grid>
         </form>
       </Container>

@@ -3,6 +3,8 @@
 export const baseURL = "http://localhost:3000";
 
 //Login Fetch Request *needs updated with new API
+
+////Auth endpoints////
 export const loginRequest = (username, password) => {
   return fetch(`${baseURL}/auth/login`, {
     method: "POST",
@@ -18,7 +20,6 @@ export const loginRequest = (username, password) => {
     });
 };
 
-//
 export const logoutRequest = (token) => {
   return fetch(`${baseURL}/auth/logout`, {
     method: "POST",
@@ -51,11 +52,11 @@ export const createAccount = (username, password) => {
     });
 };
 
-// Authorization: `Bearer ${token}`
 export const deleteAccount = (token, password) => {
   return fetch(`${baseURL}/auth/account`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
+    // Authorization: `Bearer ${token}`,
     body: JSON.stringify({
       token,
       password,
@@ -66,3 +67,64 @@ export const deleteAccount = (token, password) => {
       return res;
     });
 };
+
+export const getAccountInfo = (token) =>
+  fetch(`${baseURL}/auth/account`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+
+export const updateAccountInfo = (token, password, newUsername, newPassword) =>
+  fetch(`${baseURL}/auth/account`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+      password,
+      newUsername,
+      newPassword,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+
+////Auction endpoints////
+
+export const createAuction = (
+  token,
+  name,
+  pictureData,
+  traits,
+  stats,
+  endsAt
+) => {
+  return fetch(`${baseURL}/auth/account`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+      name,
+      pictureData,
+      traits,
+      stats,
+      endsAt,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+};
+
+////user endpoints////
+
+////Pets endpoints////

@@ -6,6 +6,7 @@ import Admin from "./views/admin.js";
 import { Route, Switch } from "react-router-dom";
 import SignUpPage from "./views/signup";
 import LoginPage from "./views/login";
+import DeleteAccount from "./views/delete";
 import Toast from "./views/toast";
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/delete" component={DeleteAccount} />
         </Switch>
       </header>
     </div>
