@@ -14,7 +14,7 @@ import { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-import { createAccount } from "../fetchRequests";
+import { createAccount } from "../apis/fetchRequests";
 import { useStore, actions } from "../store/store";
 import { Routes } from "../App";
 import { useHistory } from "react-router-dom";

@@ -5,7 +5,7 @@ import "./assets/styles/index.css";
 import App from "./App";
 //testing api end points / remove later
 // Requests are objects of exports
-import * as Requests from "./fetchRequests";
+import * as Requests from "./apis/fetchRequests";
 window.req = Requests;
 console.log(Requests);
 

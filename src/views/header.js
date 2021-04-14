@@ -15,7 +15,7 @@ import { Tabs, Tab, Box } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
-import { logoutRequest } from "../fetchRequests";
+import { logoutRequest } from "../apis/fetchRequests";
 import { Route, Switch } from "react-router";
 import SignUpPage from "./signup";
 import LoginPage from "./login";

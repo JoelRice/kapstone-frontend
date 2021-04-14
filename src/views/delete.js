@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useStore, actions } from "../store/store";
-import { deleteAccount, loginRequest } from "../fetchRequests";
+import { deleteAccount, loginRequest } from "../apis/fetchRequests";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -46,17 +46,25 @@ export default function DeleteAccount() {
   const [form, setForm] = useState({ password: "" });
 
   const handleDelete = (event) => {
-    event.preventDefault();
     const password = event.currentTarget.password.value;
+    event.preventDefault();
     deleteAccount(token, password)
       .then((res) => {
-        dispatch({
-          type: actions.LOGOUT,
-        });
-        dispatch({
-          type: actions.TOAST,
-          payload: { text: res.message, color: "#4BCC63" },
-        });
+        if (res.error) {
+          setForm({ password: "" });
+          dispatch({
+            type: actions.TOAST,
+            payload: { text: res.error, color: "#EF3823" },
+          });
+        } else {
+          dispatch({
+            type: actions.LOGOUT,
+          });
+          dispatch({
+            type: actions.TOAST,
+            payload: { text: res.message, color: "#4BCC63" },
+          });
+        }
       })
       .then(history.push("/login"));
   };
