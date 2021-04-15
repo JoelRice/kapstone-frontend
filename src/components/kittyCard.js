@@ -8,19 +8,14 @@ import CardActions from "@material-ui/core/CardActions";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    maxWidth: 300,
   },
   title: {
     fontSize: 14,
@@ -31,6 +26,9 @@ const useStyles = makeStyles({
   image: {
 
   },
+  button: {
+    margin: 2,
+  },
 });
 
 
@@ -38,11 +36,18 @@ const useStyles = makeStyles({
 
 export default function KittyCard(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [auctionTimer, setAuctionTimer] = useState(0);
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleBidding = () => {
+    setExpanded(!expanded);
+  };
+
   
   return(
     <Card className={classes.root} variant="outlined">
@@ -57,13 +62,20 @@ export default function KittyCard(props) {
           Here will go the kitty breed
         </Typography>
         <Typography variant="body2" component="p">
-          
+          <Button 
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onChange={handleBidding}
+            >
+              Bid Now
+          </Button>
+          <div className="auctionTimer">
+            Time Left {auctionTimer}
+          </div>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
         <IconButton
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -73,7 +85,7 @@ export default function KittyCard(props) {
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+        <CardContent className="kittyStats">
           <Typography paragraph>Stats:</Typography>
           <Typography paragraph>
             -produces blank coins 

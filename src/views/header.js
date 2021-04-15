@@ -59,10 +59,15 @@ export default function MenuHeader(props) {
     3: "login",
     4: "delete",
   };
+
   const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
+  const [selectedPage, setSelectedPage] = useState(page);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log(anchorEl)
+    console.log(page)
+    
   };
 
   const handleClose = () => {
@@ -118,8 +123,9 @@ export default function MenuHeader(props) {
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
+            value={selectedPage}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem label="profile" onClick={handleClick}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>Trade Requests</MenuItem>
             <MenuItem onClick={handleClose}>My Inventory</MenuItem>
             <MenuItem onClick={handleClose}>Settings</MenuItem>
