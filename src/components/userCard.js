@@ -15,13 +15,13 @@ import { Switch, Route } from "react-router-dom";
 export default function UserCard(props) {
   // const history = useHistory();
   // const dispatch = useStore((state) => state.dispatch);
-  // const {userKitties, userItems, userBio, userWishList, match, history } = props
-  // const { params } = match;
-  // const { username } = params;
+  const {userKitties, userItems, userBio, userWishList, match, history } = props
+  const { params } = match;
+  const { username } = params;
 
   useEffect (() => {
     return (
-      console.log()
+      console.log(params)
     )
   })
 
@@ -29,7 +29,7 @@ export default function UserCard(props) {
   <div className="users-page">
     <Container style={{ backgroundColor: "#cfe8fc",}}>
       <Typography>
-        User's Profile
+        {username}'s Profile
       </Typography>
       <Card>
         <CardActions>

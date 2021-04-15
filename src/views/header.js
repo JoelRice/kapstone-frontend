@@ -123,7 +123,6 @@ export default function MenuHeader(props) {
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
-            value={selectedPage}
           >
             <MenuItem label="profile" onClick={handleClick}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>Trade Requests</MenuItem>

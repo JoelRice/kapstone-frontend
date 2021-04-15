@@ -5,7 +5,7 @@ import UserCard from "../components/userCard";
 
 function Users(props) {
   return (
-  <UserCard/>
+  <UserCard {...props}/>
   );
 };
 
