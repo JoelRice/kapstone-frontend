@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, useScrollTrigger } from "@material-ui/core";
 import MenuHeader from "./views/header";
 import Admin from "./views/admin.js";
 
@@ -8,6 +8,9 @@ import SignUpPage from "./views/signup";
 import LoginPage from "./views/login";
 import DeleteAccount from "./views/delete";
 import Toast from "./views/toast";
+import AdoptionsPage from "./views/adopt"
+import Users from "./views/users"
+
 function App() {
   return (
     <div className="App">
@@ -24,6 +27,19 @@ function App() {
           <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/delete" component={DeleteAccount} />
+          <Route exact path="/adoption" component={AdoptionsPage} />
+        {/* Routes for the drop down menu, still need to add components */}
+        {/* <Route exact path="/profile" component={Users} /> */}
+        <Route exact path="/trades" component="" />
+        <Route exact path="/myinventory" component="" />
+        <Route exact path="/settings" component="" />
+        {/* Route to see other users profiles  */}
+        <Route path="/profile/:username?" render={(history) => {
+          return (
+            <Users {...history}/>
+            )
+        }} />
+
         </Switch>
       </header>
     </div>

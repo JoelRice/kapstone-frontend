@@ -1,8 +1,12 @@
-import React from "react";
+import { Container, Typography, Grid, Box, Card, CardActions, Button } from "@material-ui/core";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import UserCard from "../components/userCard";
 
 function Users(props) {
-  return <div className="users-page"></div>;
-}
+  return (
+  <UserCard {...props}/>
+  );
+};
 
 export default Users;
