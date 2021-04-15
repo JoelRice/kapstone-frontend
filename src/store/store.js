@@ -7,7 +7,6 @@ const initialState = {
   toast: {
     text: "",
     color: "",
-    //   color/statusCode/whatever: ''
   },
 };
 // set action types
@@ -39,4 +38,5 @@ const reducer = (state, action) => {
   }
 };
 // create useStore hook
+
 export const useStore = create(devtools(redux(reducer, initialState)));
