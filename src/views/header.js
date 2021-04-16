@@ -58,7 +58,7 @@ export default function MenuHeader(props) {
     1: "shop",
     2: "signup",
     3: "login",
-    4: "delete",
+    4: "users",
   };
 
   const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
@@ -66,9 +66,8 @@ export default function MenuHeader(props) {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(anchorEl);
-    console.log(page);
   };
+
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -121,15 +120,34 @@ export default function MenuHeader(props) {
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
+            onChange={handleClick}
           >
-            <MenuItem label="profile" onClick={handleClick}>
-              Profile
-            </MenuItem>
-            <MenuItem onClick={handleClose}>Trade Requests</MenuItem>
-            <MenuItem onClick={handleClose}>My Inventory</MenuItem>
-            <MenuItem onClick={handleClose}>Settings</MenuItem>
+            <MenuItem onClick={(event) => {
+                history.push("/profile");
+                setSelectedTab(null)
+                handleClose();
+                  }}>Profile</MenuItem>
+            <MenuItem onClick={(event) => {
+                setSelectedTab(null)
+                history.push("/traderequests");
+                handleClose();
+                  }}>Trade Requests</MenuItem>
+            <MenuItem onClick={(event) => {
+              setSelectedTab(null)
+              history.push("/profile/inventory");
+              handleClose();
+                }}>My Inventory</MenuItem>
+            <MenuItem onClick={(event) => {
+              setSelectedTab(null)
+              history.push("/settings");
+              handleClose();
+                }}>Settings</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            <MenuItem onClick={handleClose}>Delete Account</MenuItem>
+            <MenuItem onClick={(event) => {
+                setSelectedTab(null)
+                history.push("/delete");
+                handleClose();
+                  }}>Delete Account</MenuItem>
           </Menu>
 
           <Typography className={classes.title} variant="h6" noWrap>
@@ -146,7 +164,7 @@ export default function MenuHeader(props) {
               <Tab label="Shop Items" component={Link} />
               <Tab label="Sign Up" component={Link} />
               <Tab label="Login" component={Link} />
-              <Tab label="delete" component={Link} />
+              <Tab label="Users" component={Link} />
             </Tabs>
           </div>
         </Toolbar>

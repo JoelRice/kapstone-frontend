@@ -20,9 +20,9 @@ export default function UserCard(props) {
   const { username } = params;
 
   useEffect (() => {
-    return (
-      console.log(params)
-    )
+    // return (
+    //   console.log(params)
+    // )
   })
 
   return (
@@ -33,27 +33,28 @@ export default function UserCard(props) {
       </Typography>
       <Card>
         <CardActions>
-          <Button>
+          <Button style={{width: 25,}}>
             Request Trade
           </Button>
         </CardActions>
       </Card>
       <Grid container 
-      direction="row"
-      justify="center"
+      direction="column"
+      justify="space-evenly"
       alignItems="stretch"
+      spacing={3}
       >
-      <Grid item>
+      <Grid item  >
       <Typography>
         User's Kitties
       </Typography>
       </Grid>
-      <Grid item>
+      <Grid item >
       <Typography>
         User's Wishlist
       </Typography>
       </Grid>
-      <Grid item>
+      <Grid item  >
       <Typography>
         User's Items
       </Typography>
