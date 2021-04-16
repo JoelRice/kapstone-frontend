@@ -4,6 +4,24 @@ export const baseURL = "http://localhost:3000";
 
 //Login Fetch Request *needs updated with new API
 
+////Admin endpoints////
+export const createProducts = (token, name, pictureData, quality) => {
+  return fetch(`${baseURL}/admin/products`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+      name,
+      pictureData,
+      quality,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+};
+
 ////Auth endpoints////
 export const loginRequest = (username, password) => {
   return fetch(`${baseURL}/auth/login`, {
@@ -117,6 +135,22 @@ export const createAuction = (
       traits,
       stats,
       endsAt,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+};
+
+//"AUCTION_ID" is a placeholder
+export const auctionBid = (token, amount) => {
+  return fetch(`${baseURL}/auctions/${"AUCTION_ID"}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+      amount,
     }),
   })
     .then((res) => res.json())

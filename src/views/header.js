@@ -48,6 +48,7 @@ export default function MenuHeader(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useStore((state) => state.dispatch);
   const token = useStore((state) => state.token);
+  //TODO: history will not work, we are using useHistory now
   const { match, history } = props;
   const { params } = match;
   const { page } = params;
@@ -65,9 +66,8 @@ export default function MenuHeader(props) {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(anchorEl)
-    console.log(page)
-    
+    console.log(anchorEl);
+    console.log(page);
   };
 
   const handleClose = () => {
@@ -82,8 +82,6 @@ export default function MenuHeader(props) {
 
   const classes = useStyles();
 
-  //TODO: Get Toast response
-  //to work for Logout successful
   const handleLogout = (event) => {
     event.preventDefault();
     logoutRequest(token).then((res) => {
@@ -124,7 +122,9 @@ export default function MenuHeader(props) {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem label="profile" onClick={handleClick}>Profile</MenuItem>
+            <MenuItem label="profile" onClick={handleClick}>
+              Profile
+            </MenuItem>
             <MenuItem onClick={handleClose}>Trade Requests</MenuItem>
             <MenuItem onClick={handleClose}>My Inventory</MenuItem>
             <MenuItem onClick={handleClose}>Settings</MenuItem>
