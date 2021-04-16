@@ -11,7 +11,7 @@ console.log(Requests);
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/kapstone-frontend">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
