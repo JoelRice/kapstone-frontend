@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useStore, actions } from "../store/store";
-import { loginRequest } from "../apis/fetchRequests";
+import { loginRequest } from "../apis/subdued-fog-mouth";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -99,6 +99,8 @@ export default function LoginPage() {
               setForm((prev) => ({ ...prev, username: event.target.value }))
             }
           />
+          {/* TODO: Getting your password wrong on login page redirects you to the base route (/kapstone-frontend) for some reason */}
+          {/* TODO: Getting your password correct on login page also redirects you to the base route */}
           <TextField
             variant="outlined"
             margin="normal"
@@ -126,9 +128,11 @@ export default function LoginPage() {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="signup" variant="body2">
+              {/*TODO: Clicking "Don't have an account, sign up" on login page 404s on deployment. It probably needs to useHistory. */}
+
+              {/* <Link href="signup" variant="body2">
                 {"Don't have an account? Sign Up"}
-              </Link>
+              </Link> */}
             </Grid>
           </Grid>
         </form>
