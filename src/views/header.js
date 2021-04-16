@@ -15,7 +15,7 @@ import { Tabs, Tab, Box } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
-import { logoutRequest } from "../apis/subdued-fog-mouth";
+import { logoutRequest } from "../apis/fetchRequests";
 import { Route, Switch } from "react-router";
 import SignUpPage from "./signup";
 import LoginPage from "./login";
@@ -67,7 +67,6 @@ export default function MenuHeader(props) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -122,32 +121,52 @@ export default function MenuHeader(props) {
             onClose={handleClose}
             onChange={handleClick}
           >
-            <MenuItem onClick={(event) => {
+            <MenuItem
+              onClick={(event) => {
                 history.push("/profile");
-                setSelectedTab(null)
+                setSelectedTab(null);
                 handleClose();
-                  }}>Profile</MenuItem>
-            <MenuItem onClick={(event) => {
-                setSelectedTab(null)
+              }}
+            >
+              Profile
+            </MenuItem>
+            <MenuItem
+              onClick={(event) => {
+                setSelectedTab(null);
                 history.push("/traderequests");
                 handleClose();
-                  }}>Trade Requests</MenuItem>
-            <MenuItem onClick={(event) => {
-              setSelectedTab(null)
-              history.push("/profile/inventory");
-              handleClose();
-                }}>My Inventory</MenuItem>
-            <MenuItem onClick={(event) => {
-              setSelectedTab(null)
-              history.push("/settings");
-              handleClose();
-                }}>Settings</MenuItem>
+              }}
+            >
+              Trade Requests
+            </MenuItem>
+            <MenuItem
+              onClick={(event) => {
+                setSelectedTab(null);
+                history.push("/profile/inventory");
+                handleClose();
+              }}
+            >
+              My Inventory
+            </MenuItem>
+            <MenuItem
+              onClick={(event) => {
+                setSelectedTab(null);
+                history.push("/settings");
+                handleClose();
+              }}
+            >
+              Settings
+            </MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            <MenuItem onClick={(event) => {
-                setSelectedTab(null)
+            <MenuItem
+              onClick={(event) => {
+                setSelectedTab(null);
                 history.push("/delete");
                 handleClose();
-                  }}>Delete Account</MenuItem>
+              }}
+            >
+              Delete Account
+            </MenuItem>
           </Menu>
 
           <Typography className={classes.title} variant="h6" noWrap>

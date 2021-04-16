@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useStore, actions } from "../store/store";
-import { deleteAccount, loginRequest } from "../apis/subdued-fog-mouth";
+import { deleteAccount, loginRequest } from "../apis/fetchRequests";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
