@@ -11,7 +11,7 @@ console.log(Requests);
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/<repo>">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
