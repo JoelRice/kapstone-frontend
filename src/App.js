@@ -10,6 +10,7 @@ import DeleteAccount from "./views/delete";
 import Toast from "./views/toast";
 import AdoptionsPage from "./views/adopt"
 import Users from "./views/users"
+import Shop from "./views/shop";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/myinventory" component="" />
         <Route exact path="/settings" component="" />
         {/* Route to see other users profiles  */}
+        <Route exact path="/shop" component={Shop} />
         <Route path="/profile/:username?" render={(history) => {
           return (
             <Users {...history}/>

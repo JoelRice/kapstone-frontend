@@ -11,14 +11,19 @@ import React from "react";
 import {Grid} from "@material-ui/core";
 import ProductList from "../components/productList";
 
-
 const Shop=()=>{
-    return(
-            <Grid item container spacing={2} style={{backgroundColor: "#43463d"}} > 
-                <Grid item xs={12} sm={8} md={4}>
-                  <ProductList></ProductList>
-                </Grid>
-            </Grid> 
-    )
-}
+  return (
+    <Grid container direction="column">
+      <Grid item>
+      </Grid>
+      <Grid item container>
+        <Grid item xs={0} sm={2} />
+        <Grid item xs={12} sm={8}>
+          <ProductList />
+        </Grid>
+        <Grid item xs={0} sm={2} />
+      </Grid>
+    </Grid>
+  );
+};
 export default Shop 

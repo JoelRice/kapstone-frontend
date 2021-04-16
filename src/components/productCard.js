@@ -10,20 +10,20 @@ const ProductCard=props=>{
       <CardHeader>
         {happiness}
       </CardHeader>
-      <CardMedia style={{height:"100px"}} image={imageURL}/>
+      <CardMedia style={{height:"250px"}} image={imageURL}/>
       <CardContent>
         <Typography variant="body2" component="p">
         {title}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Buy</Button>
+        <Button size="small">Happiness</Button>
       </CardActions>
     </Card>
   );
 }
 
-export default ProductCard
+export default ProductCard;
 
 /*export default function productCard(props) {
   return;

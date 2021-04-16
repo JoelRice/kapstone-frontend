@@ -11,19 +11,18 @@ const ProductList=()=>{
 
   const shopContentList=(shopContentListObj) => {
     return (
+      <Grid item xs={12} sm={6} md={4}>
       <ProductCard {...shopContentListObj}/>
+      </Grid>
     )
   }
   return (
-    <div>
-      <Container id="items" style={{flex:"row"}}>
-    <Grid container spacing={4}> 
-      <Grid item xs={12} sm={6} md={4}>
+
+    
+    <Grid container spacing={2}> 
         {ShopContent.map(shopContentListObj=> ProductCard(shopContentListObj))}
       </Grid>
-    </Grid>
-    </Container>
-    </div>
+
   );
 }
 export default ProductList
