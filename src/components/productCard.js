@@ -4,7 +4,7 @@ import {Card, CardActions, CardContent, Button, Typography, CardHeader, CardMedi
 
 
 const ProductCard=props=>{
-  const {title, happiness, description, imageURL} = props;
+  const {title, happiness, imageURL} = props;
   return (
     <Card >
       <CardHeader>
