@@ -48,6 +48,7 @@ export default function MenuHeader(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useStore((state) => state.dispatch);
   const token = useStore((state) => state.token);
+  //TODO: history will not work, we are using useHistory now
   const { match, history } = props;
   const { params } = match;
   const { page } = params;
@@ -81,8 +82,6 @@ export default function MenuHeader(props) {
 
   const classes = useStyles();
 
-  //TODO: Get Toast response
-  //to work for Logout successful
   const handleLogout = (event) => {
     event.preventDefault();
     logoutRequest(token).then((res) => {
