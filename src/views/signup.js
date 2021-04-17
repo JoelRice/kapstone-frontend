@@ -52,9 +52,11 @@ export default function SignUpPage() {
     event.preventDefault();
     const username = event.currentTarget.username.value;
     const password = event.currentTarget.password.value;
+    // TODO: Providing an invalid/taken username or invalid password on the signup page redirects you to the login page
     createAccount(username, password)
       .then((res) => {
         if (res.error) {
+          history.block(createAccount);
           setForm({ username: "", password: "" });
           dispatch({
             type: actions.TOAST,
@@ -77,7 +79,6 @@ export default function SignUpPage() {
     <Container
       component="main"
       maxWidth="xs"
-      component="main"
       style={{ backgroundColor: "#cfe8fc", height: "500px", width: "500px" }}
     >
       <CssBaseline />
@@ -126,9 +127,11 @@ export default function SignUpPage() {
                 fullWidth
                 name="confirmpassword"
                 label="Confirm Password"
-                type="confirmpassword"
+                type="password"
                 id="confirmpassword"
                 autoComplete="current-password"
+                // TODO: Confirm password on signup page does not actually require the 'confirm' box to match the first
+
                 onChange={(event) =>
                   setForm((prev) => ({ ...prev, password: event.target.value }))
                 }
@@ -147,9 +150,10 @@ export default function SignUpPage() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="login" variant="body2">
+              {/* TODO: Clicking "Already have an account? Log In" on login page 404s on deployment. It probably needs to useHistory. */}
+              {/* <Link href="login" variant="body2">
                 Already have an account? Log In
-              </Link>
+              </Link> */}
             </Grid>
           </Grid>
         </form>

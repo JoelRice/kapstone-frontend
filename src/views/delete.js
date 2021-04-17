@@ -44,7 +44,7 @@ export default function DeleteAccount() {
   const dispatch = useStore((state) => state.dispatch);
   const token = useStore((state) => state.token);
   const [form, setForm] = useState({ password: "" });
-
+  //TODO: Getting your password wrong on the delete account page redirects you to the login page
   const handleDelete = (event) => {
     const password = event.currentTarget.password.value;
     event.preventDefault();
