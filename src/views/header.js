@@ -1,30 +1,23 @@
-import React from "react";
-import { useState } from "react";
-
 import {
   Menu,
   MenuItem,
   AppBar,
   Toolbar,
   Typography,
-  InputBase,
   IconButton,
   Link,
 } from "@material-ui/core";
-import { Tabs, Tab, Box } from "@material-ui/core";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
+import React from "react";
+import { useState } from "react";
+import { Tabs, Tab } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { logoutRequest } from "../apis/fetchRequests";
-import { Route, Switch } from "react-router";
-import SignUpPage from "./signup";
-import LoginPage from "./login";
-import Admin from "./admin";
-import { BrowserRouter, useHistory } from "react-router-dom";
+
 import { useStore, actions } from "../store/store";
-import DeleteAccount from "./delete";
+import "../assets/styles/header.css";
+
 //styling for this header is below
-//
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -62,7 +55,7 @@ export default function MenuHeader(props) {
   };
 
   const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
-  const [selectedPage, setSelectedPage] = useState(page);
+  // const [selectedPage, setSelectedPage] = useState(page);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -84,6 +77,7 @@ export default function MenuHeader(props) {
     event.preventDefault();
     logoutRequest(token).then((res) => {
       if (res.error) {
+        history.goBack();
         dispatch({ type: actions.LOGOUT });
         dispatch({
           type: actions.TOAST,

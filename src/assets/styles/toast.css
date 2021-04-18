@@ -16,7 +16,7 @@
   opacity: 0;
   visibility: hidden;
 
-  transition: opacity 1000ms, background-color 1000ms, visibility 1000ms;
+  transition: opacity 1200ms, background-color 1200ms, visibility 1200ms;
 }
 
 .toast p {

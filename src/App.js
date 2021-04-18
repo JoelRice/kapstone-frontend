@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Button, useScrollTrigger } from "@material-ui/core";
 import MenuHeader from "./views/header";
 import Admin from "./views/admin.js";
 import { useStore } from "./store/store";

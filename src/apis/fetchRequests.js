@@ -162,3 +162,36 @@ export const auctionBid = (token, amount) => {
 ////user endpoints////
 
 ////Pets endpoints////
+
+//"auction_id" is a placeholder
+export const checkPet = (token, amount) =>
+  fetch(`${baseURL}/auctions/${"auction_id"}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+      amount,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+
+export const createPet = (token, name, pictureData, traits, stats) => {
+  return fetch(`${baseURL}/admin/pets`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token,
+      name,
+      pictureData,
+      traits,
+      stats,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+};

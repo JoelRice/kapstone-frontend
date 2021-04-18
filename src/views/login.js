@@ -1,13 +1,9 @@
 import {
-  Box,
   Container,
   Button,
   TextField,
-  FormControlLabel,
-  Link,
   Grid,
   Typography,
-  Checkbox,
 } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
@@ -51,6 +47,7 @@ export default function LoginPage() {
     loginRequest(username, password)
       .then((res) => {
         if (res.error) {
+          history.push("/login");
           setForm({ username: "", password: "" });
           dispatch({
             type: actions.TOAST,
@@ -99,8 +96,7 @@ export default function LoginPage() {
               setForm((prev) => ({ ...prev, username: event.target.value }))
             }
           />
-          {/* TODO: Getting your password wrong on login page redirects you to the base route (/kapstone-frontend) for some reason */}
-          {/* TODO: Getting your password correct on login page also redirects you to the base route */}
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -126,13 +122,21 @@ export default function LoginPage() {
           >
             Sign In
           </Button>
-          <Grid container>
+          <Grid container justify="center">
             <Grid item>
-              {/*TODO: Clicking "Don't have an account, sign up" on login page 404s on deployment. It probably needs to useHistory. */}
-
-              {/* <Link href="signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link> */}
+              <Typography className={classes.form} component="h1">
+                Don't have an account yet?
+              </Typography>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  history.push("/signup");
+                }}
+              >
+                Sign Up
+              </Button>
             </Grid>
           </Grid>
         </form>
