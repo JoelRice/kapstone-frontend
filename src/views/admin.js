@@ -2,7 +2,7 @@
 //upload name of cat
 //upload stats
 import React from "react";
-import { Button, Grid, IconButton, Typography, TextField, makeStyles , ImageUpload} from "@material-ui/core";
+import { Button, Grid, Fab, SearchIcon, CollectionsIcon, IconButton, Typography, TextField, makeStyles , ImageUpload, CardContent} from "@material-ui/core";
 
 
 
@@ -32,20 +32,93 @@ function Admin() {
 
   const classes = useStyles;
 
-  /*handleUploadClick=((event)=> {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    let url = reader.readAsDataURL(file);
-  })*/
-
+    state = {
+      mainState: "initial", // initial, search, gallery, uploaded
+      imageUploaded: 0,
+      selectedFile: null
+    };
+  
+    //remove
+    handleUploadClick = event => {
+      console.log();
+      var file = event.target.files[0];
+      const reader = new FileReader();
+      var url = reader.readAsDataURL(file);
+  
+      reader.onloadend = function(e) {
+        this.setState({
+          selectedFile: [reader.result]
+        });
+      }.bind(this);
+      console.log(url);
+  
+      this.setState({
+        mainState: "uploaded",
+        selectedFile: event.target.files[0],
+        imageUploaded: 1
+      });
+    };
+  
+    handleSearchClick = event => {
+      this.setState({
+        mainState: "search"
+      });
+    };
+  
+    handleGalleryClick = event => {
+      this.setState({
+        mainState: "gallery"
+      });
+    };
+  
+    renderInitialState() {
+      const { classes, theme } = this.props;
+      const { value } = this.state;
+    
 
   return (
     <Grid container component="main" className={classes.root}>
     <Grid>
+    <form className="form" /*onSubmit={handleSubmit(onSubmit)}*/>
        <Typography className={classes.heading1} variant="h3">
          <h1 align ="center" font-color="#FFFFFF">Admin Page</h1>
-          </Typography>
-          <form className="form">
+        </Typography>
+
+          <Grid container justify="center" alignItems="center">
+            <CardContent>
+              <input 
+              accept="image/*"
+              className={classes.input}
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={this.handleUploadClick}
+            />
+            <label htmlFor="contained-button-file">
+              <Fab component="span" className={classes.button}>
+                <AddPhotoAlternateIcon />
+              </Fab>
+            </label>
+            <Fab className={classes.button} onClick={this.handleSearchClick}>
+              <SearchIcon />
+            </Fab>
+            <Fab className={classes.button} onClick={this.handleGalleryClick}>
+              <CollectionsIcon />
+            </Fab>
+        </CardContent>
+        </Grid>
+     
+           <input /*ref={register}*/ type="file" name="picture" />
+           <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              //className="form"
+            >
+              Submit
+            </Button>
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -87,29 +160,8 @@ function Admin() {
             >
               Submit
             </Button>
-
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="Cat_picture"
-              label="Cat Picture"
-              name="Stats"
-              autoComplete="URL"
-              autoFocus
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              //className="form"
-            >
-              Submit
-            </Button>
         </form>
         </Grid>
       </Grid>
-  )}
+  )}};
 export default Admin;
