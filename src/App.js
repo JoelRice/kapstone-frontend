@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Button, useScrollTrigger } from "@material-ui/core";
 import MenuHeader from "./views/header";
 import Admin from "./views/admin.js";
 import { useStore } from "./store/store";
@@ -9,7 +8,7 @@ import LoginPage from "./views/login";
 import DeleteAccount from "./views/delete";
 import Toast from "./views/toast";
 import AdoptionsPage from "./views/adopt";
-import Users from "./views/users";
+import UserCard from "./components/userCard";
 
 function App() {
   const history = useHistory();
@@ -28,12 +27,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Toast />
-        <Route
-          path="/"
-          render={(history) => {
-            return <MenuHeader {...history} />;
-          }}
-        />
+        <Route component={MenuHeader} path="/" />
         <Switch>
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/signup" component={SignUpPage} />
@@ -47,10 +41,13 @@ function App() {
           <Route exact path="/settings" component="" />
           {/* Route to see other users profiles  */}
           <Route
-            path="/profile/:username?"
-            render={(history) => {
-              return <Users {...history} />;
-            }}
+            component={UserCard}
+            path="/profile"
+            // 'history' is already declared in the upper scope.
+            // render={(history) => {
+            //   // this is current user inventory
+            //   return <UserCard {...history} />;
+            // }}
           />
         </Switch>
       </header>

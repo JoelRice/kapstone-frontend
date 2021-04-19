@@ -1,18 +1,14 @@
 import {
-  Box,
   Container,
   Button,
   TextField,
-  FormControlLabel,
-  Link,
   Grid,
   Typography,
-  Checkbox,
 } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import { useStore, actions } from "../store/store";
-import { deleteAccount, loginRequest } from "../apis/fetchRequests";
+import { deleteAccount } from "../apis/fetchRequests";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -44,29 +40,29 @@ export default function DeleteAccount() {
   const dispatch = useStore((state) => state.dispatch);
   const token = useStore((state) => state.token);
   const [form, setForm] = useState({ password: "" });
-  //TODO: Getting your password wrong on the delete account page redirects you to the login page
+
   const handleDelete = (event) => {
     const password = event.currentTarget.password.value;
     event.preventDefault();
-    deleteAccount(token, password)
-      .then((res) => {
-        if (res.error) {
-          setForm({ password: "" });
-          dispatch({
-            type: actions.TOAST,
-            payload: { text: res.error, color: "#EF3823" },
-          });
-        } else {
-          dispatch({
-            type: actions.LOGOUT,
-          });
-          dispatch({
-            type: actions.TOAST,
-            payload: { text: res.message, color: "#4BCC63" },
-          });
-        }
-      })
-      .then(history.push("/login"));
+    deleteAccount(token, password).then((res) => {
+      if (res.error) {
+        history.push("/delete");
+        setForm({ password: "" });
+        dispatch({
+          type: actions.TOAST,
+          payload: { text: res.error, color: "#EF3823" },
+        });
+      } else {
+        history.push("/signup");
+        dispatch({
+          type: actions.LOGOUT,
+        });
+        dispatch({
+          type: actions.TOAST,
+          payload: { text: res.message, color: "#4BCC63" },
+        });
+      }
+    });
   };
 
   const handleChange = (event) => {

@@ -1,0 +1,7 @@
+/* 
+This changes the default color of the header tab underline from red to white.
+TODO: Add this styling to accommodate for all browsers.
+*/
+.PrivateTabIndicator-colorSecondary-15 {
+  background-color: #ffffff !important;
+}

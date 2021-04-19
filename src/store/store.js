@@ -13,7 +13,6 @@ const initialState = {
 export const actions = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
-  // PERSIST: "PERSIST",
   TOAST: "TOAST",
   UNTOAST: "UNTOAST",
 };
