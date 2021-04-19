@@ -48,11 +48,12 @@ export default function SignUpPage() {
 
   const handleSignUp = (event) => {
     event.preventDefault();
-    if (form.password !== form.checkPassword) {
+    if (form.password !== form.confirmPassword) {
       dispatch({
         type: actions.TOAST,
         payload: { text: "Passwords don't match", color: "#EF3823" },
       });
+
       return;
     }
     const username = event.currentTarget.username.value;

@@ -124,15 +124,7 @@ export default function MenuHeader(props) {
             >
               Profile
             </MenuItem>
-            <MenuItem
-              onClick={(event) => {
-                setSelectedTab(null);
-                history.push("/traderequests");
-                handleClose();
-              }}
-            >
-              Trade Requests
-            </MenuItem>
+
             <MenuItem
               onClick={(event) => {
                 setSelectedTab(null);

@@ -53,7 +53,7 @@ export default function DeleteAccount() {
           payload: { text: res.error, color: "#EF3823" },
         });
       } else {
-        history.push("/login");
+        history.push("/signup");
         dispatch({
           type: actions.LOGOUT,
         });

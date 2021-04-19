@@ -10,10 +10,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { useStore } from "../store/store";
 import { Switch, Route } from "react-router-dom";
-
+import { checkUser } from "../apis/fetchRequests";
+// Note: userCard is displaying the users current (inventory) kitties, items, and wishlist
 export default function UserCard(props) {
   // const history = useHistory();
   // const dispatch = useStore((state) => state.dispatch);
+
   const {
     userKitties,
     userItems,
@@ -25,16 +27,16 @@ export default function UserCard(props) {
   const { params } = match;
   const { username } = params;
 
-  useEffect(() => {
-    // return (
-    //   console.log(params)
-    // )
-  });
+  const handleCheckUser = (event) => {
+    checkUser();
+    console.log(checkUser());
+  };
 
+  // {"User"} will = current users name
   return (
     <div className="users-page">
       <Container style={{ backgroundColor: "#cfe8fc" }}>
-        <Typography>{username}'s Profile</Typography>
+        <Typography alignItems="center">{"User"}'s Profile</Typography>
         <Card>
           <CardActions>
             <Button style={{ width: 25 }}>Request Trade</Button>
@@ -44,17 +46,17 @@ export default function UserCard(props) {
           container
           direction="column"
           justify="space-evenly"
-          alignItems="stretch"
+          alignItems="center"
           spacing={3}
         >
           <Grid item>
-            <Typography>User's Kitties</Typography>
+            <Typography>{"User"}'s Kitties</Typography>
           </Grid>
           <Grid item>
-            <Typography>User's Wishlist</Typography>
+            <Typography>{"User"}'s Wishlist</Typography>
           </Grid>
           <Grid item>
-            <Typography>User's Items</Typography>
+            <Typography>{"User"}'s Items</Typography>
           </Grid>
         </Grid>
       </Container>

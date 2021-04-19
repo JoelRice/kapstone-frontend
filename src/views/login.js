@@ -44,27 +44,26 @@ export default function LoginPage() {
     event.preventDefault();
     const username = event.currentTarget.username.value;
     const password = event.currentTarget.password.value;
-    loginRequest(username, password)
-      .then((res) => {
-        if (res.error) {
-          history.push("/login");
-          setForm({ username: "", password: "" });
-          dispatch({
-            type: actions.TOAST,
-            payload: { text: res.error, color: "#EF3823" },
-          });
-        } else {
-          dispatch({
-            type: actions.TOAST,
-            payload: { text: res.message, color: "#4BCC63" },
-          });
-          dispatch({
-            type: actions.LOGIN,
-            payload: res.token,
-          });
-        }
-      })
-      .then(history.push("/"));
+    loginRequest(username, password).then((res) => {
+      if (res.error) {
+        history.push("/login");
+        setForm({ username: "", password: "" });
+        dispatch({
+          type: actions.TOAST,
+          payload: { text: res.error, color: "#EF3823" },
+        });
+      } else {
+        history.push("/");
+        dispatch({
+          type: actions.TOAST,
+          payload: { text: res.message, color: "#4BCC63" },
+        });
+        dispatch({
+          type: actions.LOGIN,
+          payload: res.token,
+        });
+      }
+    });
   };
 
   const handleChange = (event) => {
