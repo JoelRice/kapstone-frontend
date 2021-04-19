@@ -36,12 +36,9 @@ export default function UserCard(props) {
   return (
     <div className="users-page">
       <Container style={{ backgroundColor: "#cfe8fc" }}>
-        <Typography alignItems="center">{"User"}'s Profile</Typography>
-        <Card>
-          <CardActions>
-            <Button style={{ width: 25 }}>Request Trade</Button>
-          </CardActions>
-        </Card>
+        <Typography align="center"> {"User"}'s Profile</Typography>
+
+        <Card></Card>
         <Grid
           container
           direction="column"

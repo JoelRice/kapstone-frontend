@@ -160,11 +160,7 @@ export default function MenuHeader(props) {
           </Typography>
 
           <div className="navigation">
-            <Tabs
-              variant="fullWidth"
-              value={selectedTab}
-              onChange={handleChange}
-            >
+            <Tabs variant="fullWidth" value={selectedTab}>
               <Tab label="Adoptions" component={Link} />
               <Tab label="Shop Items" component={Link} />
               <Tab label="Sign Up" component={Link} />
