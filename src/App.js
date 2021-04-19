@@ -7,7 +7,9 @@ import SignUpPage from "./views/signup";
 import LoginPage from "./views/login";
 import DeleteAccount from "./views/delete";
 import Toast from "./views/toast";
-import AdoptionsPage from "./views/adopt";
+import AdoptionsPage from "./views/adopt"
+import Users from "./views/users"
+import Shop from "./views/shop";
 import UserCard from "./components/userCard";
 
 function App() {
