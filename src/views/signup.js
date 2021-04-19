@@ -1,22 +1,16 @@
 import {
-  Box,
   Container,
   Button,
   TextField,
-  FormControlLabel,
-  Link,
   Grid,
   Typography,
-  Checkbox,
 } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import { createAccount } from "../apis/fetchRequests";
 import { useStore, actions } from "../store/store";
-import { Routes } from "../App";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -45,39 +39,56 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUpPage() {
   const classes = useStyles();
   const history = useHistory();
-  const [form, setForm] = useState({ username: "", password: "" });
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
   const dispatch = useStore((state) => state.dispatch);
 
   const handleSignUp = (event) => {
     event.preventDefault();
+    if (form.password !== form.confirmPassword) {
+      dispatch({
+        type: actions.TOAST,
+        payload: { text: "Passwords don't match", color: "#EF3823" },
+      });
+
+      return;
+    }
     const username = event.currentTarget.username.value;
     const password = event.currentTarget.password.value;
-    createAccount(username, password)
-      .then((res) => {
-        if (res.error) {
-          setForm({ username: "", password: "" });
-          dispatch({
-            type: actions.TOAST,
-            payload: { text: res.error, color: "#EF3823" },
-          });
-        } else {
-          dispatch({
-            type: actions.TOAST,
-            payload: { text: res.message, color: "#4BCC63" },
-          });
-          dispatch({ type: actions.LOGIN, payload: res.token });
-        }
-      })
-      .then(history.push("/login"));
+
+    createAccount(username, password).then((res) => {
+      if (res.error) {
+        history.push("/signup");
+        setForm({ username: "", password: "", checkPassword: "" });
+        dispatch({
+          type: actions.TOAST,
+          payload: { text: res.error, color: "#EF3823" },
+        });
+      } else {
+        history.push("/login");
+        dispatch({
+          type: actions.TOAST,
+          payload: { text: res.message, color: "#4BCC63" },
+        });
+        dispatch({ type: actions.LOGIN, payload: res.token });
+      }
+    });
   };
+
   const handleChange = (event) => {
-    setForm((state) => ({ ...state, [event.target.name]: event.target.value }));
+    setForm((state) => ({
+      ...state,
+      [event.target.name]: event.target.value,
+    }));
   };
+
   return (
     <Container
       component="main"
       maxWidth="xs"
-      component="main"
       style={{ backgroundColor: "#cfe8fc", height: "500px", width: "500px" }}
     >
       <CssBaseline />
@@ -97,6 +108,7 @@ export default function SignUpPage() {
                 id="username"
                 label="User Name"
                 autoFocus
+                value={form.username}
                 onChange={(event) =>
                   setForm((prev) => ({ ...prev, username: event.target.value }))
                 }
@@ -113,6 +125,7 @@ export default function SignUpPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={form.password}
                 onChange={(event) =>
                   setForm((prev) => ({ ...prev, password: event.target.value }))
                 }
@@ -124,13 +137,17 @@ export default function SignUpPage() {
                 variant="outlined"
                 required
                 fullWidth
-                name="confirmpassword"
+                name="confirm-password"
                 label="Confirm Password"
-                type="confirmpassword"
-                id="confirmpassword"
+                type="password"
+                id="confirm-password"
                 autoComplete="current-password"
+                value={form.confirmPassword}
                 onChange={(event) =>
-                  setForm((prev) => ({ ...prev, password: event.target.value }))
+                  setForm((prev) => ({
+                    ...prev,
+                    confirmPassword: event.target.value,
+                  }))
                 }
               />
             </Grid>
@@ -145,11 +162,21 @@ export default function SignUpPage() {
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justify="center">
             <Grid item>
-              <Link href="login" variant="body2">
-                Already have an account? Log In
-              </Link>
+              <Typography className={classes.form} component="h1">
+                Already have an account?
+              </Typography>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  history.push("/login");
+                }}
+              >
+                Log in
+              </Button>
             </Grid>
           </Grid>
         </form>

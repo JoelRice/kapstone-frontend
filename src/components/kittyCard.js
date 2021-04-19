@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 
 
 export default function KittyCard(props) {
+  const [image, name, breed, stats] = props;
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [auctionTimer, setAuctionTimer] = useState(0);

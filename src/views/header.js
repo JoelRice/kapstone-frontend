@@ -1,30 +1,23 @@
-import React from "react";
-import { useState } from "react";
-
 import {
   Menu,
   MenuItem,
   AppBar,
   Toolbar,
   Typography,
-  InputBase,
   IconButton,
   Link,
 } from "@material-ui/core";
-import { Tabs, Tab, Box } from "@material-ui/core";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
+import React from "react";
+import { useState } from "react";
+import { Tabs, Tab } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { logoutRequest } from "../apis/fetchRequests";
-import { Route, Switch } from "react-router";
-import SignUpPage from "./signup";
-import LoginPage from "./login";
-import Admin from "./admin";
-import { BrowserRouter, useHistory } from "react-router-dom";
+
 import { useStore, actions } from "../store/store";
-import DeleteAccount from "./delete";
+import "../assets/styles/header.css";
+
 //styling for this header is below
-//
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -48,6 +41,7 @@ export default function MenuHeader(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useStore((state) => state.dispatch);
   const token = useStore((state) => state.token);
+  //TODO: history will not work, we are using useHistory now
   const { match, history } = props;
   const { params } = match;
   const { page } = params;
@@ -57,17 +51,14 @@ export default function MenuHeader(props) {
     1: "shop",
     2: "signup",
     3: "login",
-    4: "delete",
+    4: "users",
   };
 
   const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
-  const [selectedPage, setSelectedPage] = useState(page);
+  // const [selectedPage, setSelectedPage] = useState(page);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(anchorEl)
-    console.log(page)
-    
   };
 
   const handleClose = () => {
@@ -82,12 +73,11 @@ export default function MenuHeader(props) {
 
   const classes = useStyles();
 
-  //TODO: Get Toast response
-  //to work for Logout successful
   const handleLogout = (event) => {
     event.preventDefault();
     logoutRequest(token).then((res) => {
       if (res.error) {
+        history.goBack();
         dispatch({ type: actions.LOGOUT });
         dispatch({
           type: actions.TOAST,
@@ -123,13 +113,46 @@ export default function MenuHeader(props) {
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
+            onChange={handleClick}
           >
-            <MenuItem label="profile" onClick={handleClick}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Trade Requests</MenuItem>
-            <MenuItem onClick={handleClose}>My Inventory</MenuItem>
-            <MenuItem onClick={handleClose}>Settings</MenuItem>
+            <MenuItem
+              onClick={(event) => {
+                history.push("/profile");
+                setSelectedTab(null);
+                handleClose();
+              }}
+            >
+              Profile
+            </MenuItem>
+
+            <MenuItem
+              onClick={(event) => {
+                setSelectedTab(null);
+                history.push("/profile/inventory");
+                handleClose();
+              }}
+            >
+              My Inventory
+            </MenuItem>
+            <MenuItem
+              onClick={(event) => {
+                setSelectedTab(null);
+                history.push("/settings");
+                handleClose();
+              }}
+            >
+              Settings
+            </MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            <MenuItem onClick={handleClose}>Delete Account</MenuItem>
+            <MenuItem
+              onClick={(event) => {
+                setSelectedTab(null);
+                history.push("/delete");
+                handleClose();
+              }}
+            >
+              Delete Account
+            </MenuItem>
           </Menu>
 
           <Typography className={classes.title} variant="h6" noWrap>
@@ -146,7 +169,7 @@ export default function MenuHeader(props) {
               <Tab label="Shop Items" component={Link} />
               <Tab label="Sign Up" component={Link} />
               <Tab label="Login" component={Link} />
-              <Tab label="delete" component={Link} />
+              <Tab label="Users" component={Link} />
             </Tabs>
           </div>
         </Toolbar>
