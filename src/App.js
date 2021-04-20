@@ -16,7 +16,6 @@ function App() {
   const history = useHistory();
   const token = useStore((state) => state.token);
   useEffect(() => {
-    console.log(localStorage.getItem("lastVisit"));
     window.onbeforeunload = () => {
       localStorage.setItem("lastVisit", history.location.pathname);
     };
@@ -39,8 +38,6 @@ function App() {
           <Route exact path="/adoption" component={AdoptionsPage} />
           {/* Routes for the drop down menu, still need to add components */}
           {/* <Route exact path="/profile" component={Users} /> */}
-          <Route exact path="/trades" component="" />
-          <Route exact path="/myinventory" component="" />
           <Route exact path="/settings" component="" />
           {/* Route to see other users profiles  */}
           <Route
