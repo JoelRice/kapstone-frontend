@@ -222,13 +222,13 @@ export const getProductDetailsByName = (name) =>
       return res;
     });
 
-export const purchaseProductByName = (token, quality, name) => {
+export const purchaseProductByName = (token, quantity, name) => {
   return fetch(`${baseURL}/products/${name}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       token,
-      quality,
+      quantity,
     }),
   })
     .then((res) => res.json())
