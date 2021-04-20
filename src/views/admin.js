@@ -16,12 +16,70 @@ import {
   CardContent,
 } from "@material-ui/core";
 
+import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
+
 import { createPet } from '../apis/fetchRequests';
 import { useStore, actions } from '../store/store';
 
-import '../assets/styles/admin.css';
+//import '../assets/styles/admin.css';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  headers: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    marginTop: theme.spacing(4),
+  },
+  fileInput: {
+    position: "relative",
+    zIndex: -2,
+    top: "-38px",
+    left: "-100px",
+    width: "100%",
+    color: "#FFFFFF",
+    '&::before': {
+      content: '"____________"',
+      color: "#43464d",
+      backgroundColor: "#43464d",
+      position: "relative",
+      left: "88px",
+      borderTop: "3px solid #43464d",
+      borderBottom: "3px solid #43464d",
+    }
+  },
+  textInput: {
+    margin: theme.spacing(0.5),
+    marginBottom: theme.spacing(2),
+    // '& > .MuiFormLabel-root': {
+    //   color: "rgba(255, 255, 255, 0.54)",
+    // },
+    // '& > .MuiInputBase-root': {
+    //   color: "rgba(255, 255, 255, 0.87)",
+    // },
+    // '& .MuiOutlinedInput-notchedOutline': {
+    //   borderColor: "rgba(255, 255, 255, 0.23)",
+    // }
+  },
+}));
 
 function Admin() {
+  const classes = useStyles(theme);
   const token = useStore((state) => state.token);
   const toast = useStore((state) => state.toast);
   const dispatch = useStore((state) => state.dispatch);
@@ -72,28 +130,38 @@ function Admin() {
   return (
     <Grid container component="main" justify="center">
       <Grid>
-        <Typography className="headers" variant="h3">
-            Admin Page
+        <Typography
+          className={classes.headers}
+          component="h1"
+          variant="h3"
+        >
+          Admin Page
         </Typography>
         <CardContent>
-          <Typography className="headers" variant="h3">
-              Create a Cat
+          <Typography
+            className={classes.headers}
+            component="h2"
+            variant="h4"
+          >
+            Create a Cat
           </Typography>
           <form onSubmit={handleSubmitCat}>
-            <label htmlFor="contained-button-file">
+            <label htmlFor="file-input-1">
               <Fab component="span">
                 <AddPhotoAlternate />
               </Fab>
             </label>
             <input
               accept="image/png image/jpeg"
-              id="contained-button-file"
+              id="file-input-1"
+              className={classes.fileInput}
               type="file"
               name="photoInput"
               required
             />
             <TextField
               variant="outlined"
+              className={classes.textInput}
               margin="normal"
               fullWidth
               label="Cat Name"
@@ -105,6 +173,7 @@ function Admin() {
             <div>
             <TextField
               variant="outlined"
+              className={classes.textInput}
               margin="normal"
               label="Cuddly (1-3)"
               name="cuddly"
@@ -114,6 +183,7 @@ function Admin() {
             />
             <TextField
               variant="outlined"
+              className={classes.textInput}
               margin="normal"
               label="Lazy (1-3)"
               name="lazy"
@@ -122,6 +192,7 @@ function Admin() {
             />
             <TextField
               variant="outlined"
+              className={classes.textInput}
               margin="normal"
               label="Hungry (1-3)"
               name="hungry"
@@ -130,6 +201,7 @@ function Admin() {
             />
             <TextField
               variant="outlined"
+              className={classes.textInput}
               margin="normal"
               label="Playful (1-3)"
               name="playful"
@@ -138,6 +210,7 @@ function Admin() {
             />
             <TextField
               variant="outlined"
+              className={classes.textInput}
               margin="normal"
               label="Loyal (1+)"
               name="loyal"
