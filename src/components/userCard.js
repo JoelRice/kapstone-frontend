@@ -27,10 +27,9 @@ export default function UserCard(props) {
   const { params } = match;
   const { username } = params;
 
-  const handleCheckUser = (event) => {
-    checkUser();
-    console.log(checkUser());
-  };
+  // const handleCheckUser = (event) => {
+  //
+  // };
 
   // {"User"} will = current users name
   return (
