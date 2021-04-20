@@ -21,28 +21,25 @@ import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 import { createPet } from '../apis/fetchRequests';
 import { useStore, actions } from '../store/store';
 
-//import '../assets/styles/admin.css';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       light: '#757ce8',
+//       main: '#3f50b5',
+//       dark: '#002884',
+//       contrastText: '#fff',
+//     },
+//     secondary: {
+//       light: '#ff7961',
+//       main: '#f44336',
+//       dark: '#ba000d',
+//       contrastText: '#ffffff',
+//     },
+//   },
+// });
 
 const useStyles = makeStyles((theme) => ({
   headers: {
-    color: "#FFFFFF",
     textAlign: "center",
     marginTop: theme.spacing(4),
   },
@@ -52,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
     top: "-38px",
     left: "-100px",
     width: "100%",
-    color: "#FFFFFF",
     '&::before': {
       content: '"____________"',
       color: "#43464d",
@@ -79,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Admin() {
-  const classes = useStyles(theme);
+  const classes = useStyles(); // useStyles(theme);
   const token = useStore((state) => state.token);
   const toast = useStore((state) => state.toast);
   const dispatch = useStore((state) => state.dispatch);
@@ -92,7 +88,6 @@ function Admin() {
     loyal: 1,
   });
   const handleSubmitCat = (event) => {
-    console.log(event);
     event.preventDefault();
     createPet(
       token,
@@ -120,7 +115,6 @@ function Admin() {
       });
   };
   const handleFormChange = (event) => {
-    console.log(event);
     setForm((prev) => {
       let next = { ...prev };
       next[event.target.name] = event.target.value;
