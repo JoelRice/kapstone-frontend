@@ -4,11 +4,11 @@ import {
   TextField,
   Grid,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
 import React from "react";
 import { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles } from "@material-ui/core/styles";
 import { createAccount } from "../apis/fetchRequests";
 import { useStore, actions } from "../store/store";
 import { useHistory } from "react-router-dom";

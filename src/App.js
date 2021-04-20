@@ -7,10 +7,11 @@ import SignUpPage from "./views/signup";
 import LoginPage from "./views/login";
 import DeleteAccount from "./views/delete";
 import Toast from "./views/toast";
-import AdoptionsPage from "./views/adopt"
-import Users from "./views/users"
+import AdoptionsPage from "./views/adopt";
+import Users from "./views/users";
 import Shop from "./views/shop";
 import UserCard from "./components/userCard";
+import Settings from "./views/settings";
 
 function App() {
   const history = useHistory();
@@ -38,7 +39,7 @@ function App() {
           <Route exact path="/adoption" component={AdoptionsPage} />
           {/* Routes for the drop down menu, still need to add components */}
           {/* <Route exact path="/profile" component={Users} /> */}
-          <Route exact path="/settings" component="" />
+          <Route exact path="/settings" component={Settings} />
           {/* Route to see other users profiles  */}
           <Route
             component={UserCard}
