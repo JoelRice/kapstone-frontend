@@ -16,10 +16,11 @@ function App() {
   const history = useHistory();
   const token = useStore((state) => state.token);
   useEffect(() => {
+    console.log(localStorage.getItem("lastVisit"));
     window.onbeforeunload = () => {
       localStorage.setItem("lastVisit", history.location.pathname);
     };
-    if (token !== null) {
+    if (token !== null && history.location.pathname === "/") {
       history.push(localStorage.getItem("lastVisit"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

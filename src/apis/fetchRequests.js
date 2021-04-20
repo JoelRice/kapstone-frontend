@@ -1,6 +1,6 @@
 //This is not our current baseURL. It is just here as a place holder.*needs updated with new API
 //baseURL will be https://subdued-fog-mouth.glitch.me for deployment
-export const baseURL = "http://localhost:3000";
+export const baseURL = "http://localhost:3001";
 
 //Login Fetch Request *needs updated with new API
 
@@ -177,14 +177,29 @@ export const checkPet = (token, amount) =>
       return res;
     });
 
-export const createPet = (formData) => {
-  fetch(`${baseURL}/admin/pets`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    body: formData,
-  });
+// Literal cancer
+export const createPet = (token, name, imageFile, cuddly, lazy, hungry, playful, loyal) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.onload = (event) => {
+      const formData = new FormData();
+      formData.append("token", token);
+      formData.append("name", name);
+      formData.append("pictureData", event.target.result);
+      formData.append("cuddly", cuddly);
+      formData.append("lazy", lazy);
+      formData.append("hungry", hungry);
+      formData.append("playful", playful);
+      formData.append("loyal", loyal);
+
+      fetch(`${baseURL}/admin/pet`, {
+        method: "POST",
+        body: formData,
+      }).then((res) => res.json())
+      .then((json) => resolve(json));
+    }
+    fileReader.readAsDataURL(imageFile);
+  });  
 };
 ////Products endpoints////
 export const getAllProductNames = () =>
