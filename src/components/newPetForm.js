@@ -126,7 +126,7 @@ function NewPetForm() {
         variant="outlined"
         className={classes.textInput}
         margin="normal"
-        label="Cuddly (1-3)"
+        label="Cuddly (1-5)"
         name="cuddly"
         onChange={handleFormChange}
         value={form.cuddly}
@@ -135,7 +135,7 @@ function NewPetForm() {
         variant="outlined"
         className={classes.textInput}
         margin="normal"
-        label="Lazy (1-3)"
+        label="Lazy (1-5)"
         name="lazy"
         onChange={handleFormChange}
         value={form.lazy}
@@ -144,7 +144,7 @@ function NewPetForm() {
         variant="outlined"
         className={classes.textInput}
         margin="normal"
-        label="Hungry (1-3)"
+        label="Hungry (1-5)"
         name="hungry"
         onChange={handleFormChange}
         value={form.hungry}
@@ -153,7 +153,7 @@ function NewPetForm() {
         variant="outlined"
         className={classes.textInput}
         margin="normal"
-        label="Playful (1-3)"
+        label="Playful (1-5)"
         name="playful"
         onChange={handleFormChange}
         value={form.playful}
