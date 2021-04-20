@@ -256,7 +256,7 @@ export const createProduct = (
       formData.append("quality", quality);
       formData.append("category", category);
       formData.append("price", price);
-      fetch(`${baseURL}/admin/pet`, {
+      fetch(`${baseURL}/admin/product`, {
         method: "POST",
         body: formData,
       })
