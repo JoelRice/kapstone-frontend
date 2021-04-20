@@ -30,8 +30,8 @@ export const createAuction = (token, pet, endsAt) => {
     });
 };
 
-export const checkAuctions = () =>
-  fetch(`${baseURL}/auctions/:id`, {
+export const checkAuctions = (id) =>
+  fetch(`${baseURL}/auctions/${id}`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -40,8 +40,8 @@ export const checkAuctions = () =>
       return res;
     });
 
-export const bidOnAuction = (token, amount) => {
-  return fetch(`${baseURL}/auctions/:id`, {
+export const bidOnAuction = (token, amount, id) => {
+  return fetch(`${baseURL}/auctions/${id}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -82,6 +82,7 @@ export const loginRequest = (username, password) => {
   })
     .then((res) => res.json())
     .then((res) => {
+      console.log(res);
       return res;
     });
 };
@@ -158,8 +159,8 @@ export const getAllPetIds = () =>
       return res;
     });
 
-export const checkPet = () =>
-  fetch(`${baseURL}/pets/:id`, {
+export const checkPet = (id) =>
+  fetch(`${baseURL}/pets/${id}`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -211,8 +212,8 @@ export const getAllProductNames = () =>
       return res;
     });
 
-export const getProductDetailsByName = () =>
-  fetch(`${baseURL}/products/:name`, {
+export const getProductDetailsByName = (name) =>
+  fetch(`${baseURL}/products/${name}`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -220,8 +221,8 @@ export const getProductDetailsByName = () =>
       return res;
     });
 
-export const purchaseProductByName = (token, quality) => {
-  return fetch(`${baseURL}/products/:name`, {
+export const purchaseProductByName = (token, quality, name) => {
+  return fetch(`${baseURL}/products/${name}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -236,32 +237,34 @@ export const purchaseProductByName = (token, quality) => {
 };
 
 ////Admin only for (Products)////
-export const createProducts = (
+export const createProduct = (
   token,
   name,
-  pictureData,
+  imageFile,
   quality,
   category,
   price
 ) => {
-  return fetch(`${baseURL}/admin/product`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      token,
-      name,
-      pictureData,
-      quality,
-      category,
-      price,
-    }),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      return res;
-    });
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.onload = (event) => {
+      const formData = new FormData();
+      formData.append("token", token);
+      formData.append("name", name);
+      formData.append("pictureData", event.target.result);
+      formData.append("quality", quality);
+      formData.append("category", category);
+      formData.append("price", price);
+      fetch(`${baseURL}/admin/pet`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((json) => resolve(json));
+    };
+    fileReader.readAsDataURL(imageFile);
+  });
 };
-
 ////Users endpoints////
 
 export const getAllUserIds = () =>
@@ -273,8 +276,8 @@ export const getAllUserIds = () =>
       return res;
     });
 
-export const checkUser = () =>
-  fetch(`${baseURL}/users/:id`, {
+export const checkUser = (id) =>
+  fetch(`${baseURL}/users/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({}),
