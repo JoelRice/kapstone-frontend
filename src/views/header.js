@@ -8,7 +8,7 @@ import {
   Link,
 } from "@material-ui/core";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, Tab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -35,7 +35,20 @@ const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: "inherit",
   },
+  tabs: {
+    '& .MuiTabs-indicator': {
+      backgroundColor: '#eeeeff',
+    },
+  }
 }));
+
+const PAGE_INDEXES = [
+  "/adoption",
+  "/shop",
+  "/signup",
+  "/login",
+  "/users",
+];
 
 export default function MenuHeader(props) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -43,18 +56,11 @@ export default function MenuHeader(props) {
   const token = useStore((state) => state.token);
   //TODO: history will not work, we are using useHistory now
   const { match, history } = props;
-  const { params } = match;
-  const { page } = params;
 
-  const indexToTabName = {
-    0: "adoption",
-    1: "shop",
-    2: "signup",
-    3: "login",
-    4: "users",
-  };
-
-  const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
+  const [selectedTab, setSelectedTab] = useState(() => {
+    const start = PAGE_INDEXES.indexOf(history.location.pathname);
+    return (start >= 0) ? start : false;
+  });
   // const [selectedPage, setSelectedPage] = useState(page);
 
   const handleClick = (event) => {
@@ -65,11 +71,13 @@ export default function MenuHeader(props) {
     setAnchorEl(null);
   };
 
-  const handleChange = (event, newValue) => {
-    const linkPath = indexToTabName[newValue];
-    history.push(linkPath);
-    setSelectedTab(newValue);
+  const setTab = (event, newIndex) => {
+    setSelectedTab(newIndex);
   };
+
+  useEffect(() => {
+    history.push(PAGE_INDEXES[selectedTab]);
+  }, [history, selectedTab]);
 
   const classes = useStyles();
 
@@ -118,7 +126,7 @@ export default function MenuHeader(props) {
             <MenuItem
               onClick={(event) => {
                 history.push("/profile");
-                setSelectedTab(null);
+                setSelectedTab(false);
                 handleClose();
               }}
             >
@@ -127,16 +135,7 @@ export default function MenuHeader(props) {
 
             <MenuItem
               onClick={(event) => {
-                setSelectedTab(null);
-                history.push("/profile/inventory");
-                handleClose();
-              }}
-            >
-              My Inventory
-            </MenuItem>
-            <MenuItem
-              onClick={(event) => {
-                setSelectedTab(null);
+                setSelectedTab(false);
                 history.push("/settings");
                 handleClose();
               }}
@@ -146,7 +145,7 @@ export default function MenuHeader(props) {
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
             <MenuItem
               onClick={(event) => {
-                setSelectedTab(null);
+                setSelectedTab(false);
                 history.push("/delete");
                 handleClose();
               }}
@@ -160,7 +159,13 @@ export default function MenuHeader(props) {
           </Typography>
 
           <div className="navigation">
-            <Tabs variant="fullWidth" value={selectedTab} onChange={handleChange}>
+            <Tabs
+              variant="fullWidth"
+              value={selectedTab}
+              className={classes.tabs}
+              indicatorColor="secondary"
+              onChange={setTab}
+            >
               <Tab label="Adoptions" component={Link} />
               <Tab label="Shop Items" component={Link} />
               <Tab label="Sign Up" component={Link} />
