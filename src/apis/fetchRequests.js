@@ -5,17 +5,15 @@ export const baseURL = "http://localhost:3001";
 //Login Fetch Request *needs updated with new API
 
 ////Auction endpoints////
-//needs response body
-export const getAllIds = () =>
+export const getAllAuctionIds = () =>
   fetch(`${baseURL}/auctions`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({}),
   })
     .then((res) => res.json())
     .then((res) => {
       return res;
     });
+
 export const createAuction = (token, pet, endsAt) => {
   return fetch(`${baseURL}/auctions`, {
     method: "POST",
@@ -31,23 +29,19 @@ export const createAuction = (token, pet, endsAt) => {
       return res;
     });
 };
-//"AUCTION_ID" is a placeholder
-//needs response body
+
 export const checkAuctions = () =>
-  fetch(`${baseURL}/auctions/${"AUCTION_ID"}`, {
+  fetch(`${baseURL}/auctions/:id`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({}),
   })
     .then((res) => res.json())
     .then((res) => {
+      console.log(res);
       return res;
     });
 
-//"AUCTION_ID" is a placeholder
-
 export const bidOnAuction = (token, amount) => {
-  return fetch(`${baseURL}/auctions/${"AUCTION_ID"}`, {
+  return fetch(`${baseURL}/auctions/:id`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -76,6 +70,7 @@ export const createAccount = (username, password) => {
       return res;
     });
 };
+
 export const loginRequest = (username, password) => {
   return fetch(`${baseURL}/auth/login`, {
     method: "POST",
@@ -103,6 +98,7 @@ export const getAccountInfo = (token) =>
     .then((res) => {
       return res;
     });
+
 export const updateAccountInfo = (token, password, newUsername, newPassword) =>
   fetch(`${baseURL}/auth/account`, {
     method: "PUT",
@@ -118,11 +114,11 @@ export const updateAccountInfo = (token, password, newUsername, newPassword) =>
     .then((res) => {
       return res;
     });
+
 export const deleteAccount = (token, password) => {
   return fetch(`${baseURL}/auth/account`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    // Authorization: `Bearer ${token}`,
     body: JSON.stringify({
       token,
       password,
@@ -133,11 +129,11 @@ export const deleteAccount = (token, password) => {
       return res;
     });
 };
+
 export const logoutRequest = (token) => {
   return fetch(`${baseURL}/auth/logout`, {
     method: "POST",
     headers: {
-      // Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -150,35 +146,37 @@ export const logoutRequest = (token) => {
     });
 };
 
+////Interactions endpoints////
+
 ////Pets endpoints////
 export const getAllPetIds = () =>
   fetch(`${baseURL}/pets`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({}),
   })
     .then((res) => res.json())
     .then((res) => {
       return res;
     });
 
-//"auction_id" is a placeholder
-export const checkPet = (token, amount) =>
-  fetch(`${baseURL}/auctions/${"auction_id"}`, {
+export const checkPet = () =>
+  fetch(`${baseURL}/pets/:id`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      token,
-      amount,
-    }),
   })
     .then((res) => res.json())
     .then((res) => {
       return res;
     });
 
-// Literal cancer
-export const createPet = (token, name, imageFile, cuddly, lazy, hungry, playful, loyal) => {
+export const createPet = (
+  token,
+  name,
+  imageFile,
+  cuddly,
+  lazy,
+  hungry,
+  playful,
+  loyal
+) => {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     fileReader.onload = (event) => {
@@ -195,38 +193,35 @@ export const createPet = (token, name, imageFile, cuddly, lazy, hungry, playful,
       fetch(`${baseURL}/admin/pet`, {
         method: "POST",
         body: formData,
-      }).then((res) => res.json())
-      .then((json) => resolve(json));
-    }
+      })
+        .then((res) => res.json())
+        .then((json) => resolve(json));
+    };
     fileReader.readAsDataURL(imageFile);
-  });  
+  });
 };
+
 ////Products endpoints////
 export const getAllProductNames = () =>
   fetch(`${baseURL}/products`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({}),
   })
     .then((res) => res.json())
     .then((res) => {
       return res;
     });
 
-//"auction_id" is a placeholder
 export const getProductDetailsByName = () =>
-  fetch(`${baseURL}/products/${"auction_id"}`, {
+  fetch(`${baseURL}/products/:name`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({}),
   })
     .then((res) => res.json())
     .then((res) => {
       return res;
     });
-//"product_name" is a placeholder
+
 export const purchaseProductByName = (token, quality) => {
-  return fetch(`${baseURL}/products/${"product_name"}`, {
+  return fetch(`${baseURL}/products/:name`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -241,7 +236,14 @@ export const purchaseProductByName = (token, quality) => {
 };
 
 ////Admin only for (Products)////
-export const createProducts = (token, name, pictureData, quality) => {
+export const createProducts = (
+  token,
+  name,
+  pictureData,
+  quality,
+  category,
+  price
+) => {
   return fetch(`${baseURL}/admin/product`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -250,6 +252,8 @@ export const createProducts = (token, name, pictureData, quality) => {
       name,
       pictureData,
       quality,
+      category,
+      price,
     }),
   })
     .then((res) => res.json())
@@ -257,22 +261,20 @@ export const createProducts = (token, name, pictureData, quality) => {
       return res;
     });
 };
+
 ////Users endpoints////
 
 export const getAllUserIds = () =>
   fetch(`${baseURL}/users`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({}),
   })
     .then((res) => res.json())
     .then((res) => {
       return res;
     });
 
-//"AUCTION_ID" is a placeholder
-export const checkUser = (token) =>
-  fetch(`${baseURL}/users${token}`, {
+export const checkUser = () =>
+  fetch(`${baseURL}/users/:id`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({}),
