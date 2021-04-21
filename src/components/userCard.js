@@ -8,51 +8,39 @@ import {
   Button,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useStore } from "../store/store";
-import { Switch, Route } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { checkUser } from "../apis/fetchRequests";
-// Note: userCard is displaying the users current (inventory) kitties, items, and wishlist
+
 export default function UserCard(props) {
-  // const history = useHistory();
-  // const dispatch = useStore((state) => state.dispatch);
+  const history = useHistory();
+  const { id } = props;
+  const [userInfo, setUserInfo] = useState({});
+  
+  useEffect(() => {
+    checkUser(id).then((res) => {
+      setUserInfo(res);
+    });
+  }, [setUserInfo, id]);
 
-  const {
-    userKitties,
-    userItems,
-    userBio,
-    userWishList,
-    match,
-    history,
-  } = props;
-  const { params } = match;
-  const { username } = params;
-
-  // const handleCheckUser = (event) => {
-  //
-  // };
-
-  // {"User"} will = current users name
   return (
     <div className="users-page">
       <Container style={{ backgroundColor: "#cfe8fc" }}>
-        <Typography align="center"> {"User"}'s Profile</Typography>
-
-        <Card></Card>
         <Grid
           container
-          direction="column"
+          direction="row"
           justify="space-evenly"
           alignItems="center"
           spacing={3}
         >
           <Grid item>
-            <Typography>{"User"}'s Kitties</Typography>
+            <Typography>{userInfo.username || '?'}</Typography>
           </Grid>
           <Grid item>
-            <Typography>{"User"}'s Wishlist</Typography>
+            <Typography>Balance: {userInfo.balance || '0'}</Typography>
           </Grid>
           <Grid item>
-            <Typography>{"User"}'s Items</Typography>
+            {/* Could be replaced with a kitty card for each one */}
+            <Typography>Kitties: {userInfo.pets?.length || '0'}</Typography>
           </Grid>
         </Grid>
       </Container>

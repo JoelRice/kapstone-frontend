@@ -7,9 +7,9 @@ import {
   CardActions,
   Button,
 } from "@material-ui/core";
+import UserCard from "../components/userCard"
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import UserCard from "../components/userCard";
+import { useHistory, Link } from "react-router-dom";
 import { getAllUserIds } from "../apis/fetchRequests";
 
 function UsersPage(props) {
@@ -26,11 +26,11 @@ function UsersPage(props) {
     });
   }, [setUsersList])
   return (
-    <div>
+    <ul>
       {usersList.map((userId) => (
-        <UserCard id={userId} />
+        <UserCard id={userId} key={userId} />
       ))}
-    </div>
+    </ul>
   );
 }
 

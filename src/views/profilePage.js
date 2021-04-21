@@ -27,8 +27,43 @@ function ProfilePage(props) {
     });
   }, [token, setUserDetails])
   return (
-    <div>
-      I work
+    <div className="profile-page">
+      <Typography component="h2" variant="h2">{userDetails.username || '?'}'s Inventory</Typography>
+      <Container style={{ backgroundColor: "#cfe8fc" }}>
+        <Grid
+          container
+          direction="column"
+          justify="space-evenly"
+          alignItems="flex-start"
+          spacing={3}
+        >
+          <Grid item>
+            <Typography>Balance: {userDetails.balance || '0'}</Typography>
+          </Grid>
+          <Grid item>
+            <Typography>Kitties:</Typography>
+            <Grid>
+              {
+                userDetails.pets?.map((petId) => (
+                  // Should be a PetCard
+                  <div key={petId}>{petId}</div>
+                ))
+              }
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography>Items:</Typography>
+            <Grid>
+              {
+                userDetails.inventory?.map((productName, i) => (
+                  // Should be a ProductCard
+                  <div key={i}>{productName.split('-').map(s => s[0].toUpperCase() + s.slice(1)).join(' ')}</div>
+                ))
+              }
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 }
