@@ -95,7 +95,6 @@ export const getAccountInfo = (token) =>
   fetch(`${baseURL}/auth/account`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     },
   })
@@ -289,7 +288,6 @@ export const checkUser = (id) =>
   fetch(`${baseURL}/users/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({}),
   })
     .then((res) => res.json())
     .then((res) => {

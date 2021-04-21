@@ -7,7 +7,6 @@ import App from "./App";
 // Requests are objects of exports
 import * as Requests from "./apis/fetchRequests";
 window.req = Requests;
-console.log(Requests);
 
 ReactDOM.render(
   <React.StrictMode>

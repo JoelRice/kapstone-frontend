@@ -7,11 +7,10 @@ import SignUpPage from "./views/signup";
 import LoginPage from "./views/login";
 import DeleteAccount from "./views/delete";
 import Toast from "./views/toast";
-import AdoptionsPage from "./views/adopt";
-import Users from "./views/users";
+import AdoptionsPage from "./views/adopt"
+import UsersPage from "./views/usersPage"
+import ProfilePage from "./views/profilePage"
 import Shop from "./views/shop";
-import UserCard from "./components/userCard";
-import Settings from "./views/settings";
 
 function App() {
   const history = useHistory();
@@ -37,19 +36,12 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/delete" component={DeleteAccount} />
           <Route exact path="/adoption" component={AdoptionsPage} />
+          <Route component={UsersPage} path="/users" />
           {/* Routes for the drop down menu, still need to add components */}
-          {/* <Route exact path="/profile" component={Users} /> */}
-          <Route exact path="/settings" component={Settings} />
-          {/* Route to see other users profiles  */}
-          <Route
-            component={UserCard}
-            path="/profile"
-            // 'history' is already declared in the upper scope.
-            // render={(history) => {
-            //   // this is current user inventory
-            //   return <UserCard {...history} />;
-            // }}
-          />
+          <Route component={ProfilePage} path="/profile" />
+          <Route exact path="/settings" component="" />
+          {/* Route to see other my profile  */}
+          
         </Switch>
       </header>
     </div>
