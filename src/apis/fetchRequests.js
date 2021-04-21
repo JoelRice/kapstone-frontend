@@ -17,9 +17,11 @@ export const getAllAuctionIds = () =>
 export const createAuction = (token, pet, endsAt) => {
   return fetch(`${baseURL}/auctions`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
     body: JSON.stringify({
-      token,
       pet,
       endsAt,
     }),
@@ -43,9 +45,11 @@ export const checkAuctions = (id) =>
 export const bidOnAuction = (token, amount, id) => {
   return fetch(`${baseURL}/auctions/${id}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
     body: JSON.stringify({
-      token,
       amount,
     }),
   })
@@ -90,10 +94,10 @@ export const loginRequest = (username, password) => {
 export const getAccountInfo = (token) =>
   fetch(`${baseURL}/auth/account`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      token,
-    }),
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
   })
     .then((res) => res.json())
     .then((res) => {
@@ -103,9 +107,11 @@ export const getAccountInfo = (token) =>
 export const updateAccountInfo = (token, password, newUsername, newPassword) =>
   fetch(`${baseURL}/auth/account`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
     body: JSON.stringify({
-      token,
       password,
       newUsername,
       newPassword,
@@ -119,9 +125,11 @@ export const updateAccountInfo = (token, password, newUsername, newPassword) =>
 export const deleteAccount = (token, password) => {
   return fetch(`${baseURL}/auth/account`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
     body: JSON.stringify({
-      token,
       password,
     }),
   })
@@ -136,10 +144,8 @@ export const logoutRequest = (token) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      token,
-    }),
   })
     .then((res) => res.json())
     .then((res) => {
@@ -183,7 +189,6 @@ export const createPet = (
     const fileReader = new FileReader();
     fileReader.onload = (event) => {
       const formData = new FormData();
-      formData.append("token", token);
       formData.append("name", name);
       formData.append("pictureData", event.target.result);
       formData.append("cuddly", cuddly);
@@ -195,6 +200,7 @@ export const createPet = (
       fetch(`${baseURL}/admin/pet`, {
         method: "POST",
         body: formData,
+        headers: { "Authorization": `Bearer ${token}` },
       })
         .then((res) => res.json())
         .then((json) => resolve(json));
@@ -225,9 +231,11 @@ export const getProductDetailsByName = (name) =>
 export const purchaseProductByName = (token, quantity, name) => {
   return fetch(`${baseURL}/products/${name}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
     body: JSON.stringify({
-      token,
       quantity,
     }),
   })
@@ -250,7 +258,6 @@ export const createProduct = (
     const fileReader = new FileReader();
     fileReader.onload = (event) => {
       const formData = new FormData();
-      formData.append("token", token);
       formData.append("name", name);
       formData.append("pictureData", event.target.result);
       formData.append("quality", quality);
@@ -259,6 +266,7 @@ export const createProduct = (
       fetch(`${baseURL}/admin/product`, {
         method: "POST",
         body: formData,
+        headers: { 'Authorization': `Bearer ${token}`, },
       })
         .then((res) => res.json())
         .then((json) => resolve(json));
