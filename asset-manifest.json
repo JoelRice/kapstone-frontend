@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/kapstone-frontend/static/css/main.523e682e.chunk.css",
-    "main.js": "/kapstone-frontend/static/js/main.f86e9cbe.chunk.js",
-    "main.js.map": "/kapstone-frontend/static/js/main.f86e9cbe.chunk.js.map",
+    "main.js": "/kapstone-frontend/static/js/main.39372c16.chunk.js",
+    "main.js.map": "/kapstone-frontend/static/js/main.39372c16.chunk.js.map",
     "runtime-main.js": "/kapstone-frontend/static/js/runtime-main.66f0ecb1.js",
     "runtime-main.js.map": "/kapstone-frontend/static/js/runtime-main.66f0ecb1.js.map",
-    "static/js/2.350fe77f.chunk.js": "/kapstone-frontend/static/js/2.350fe77f.chunk.js",
-    "static/js/2.350fe77f.chunk.js.map": "/kapstone-frontend/static/js/2.350fe77f.chunk.js.map",
+    "static/js/2.1a5cdbdb.chunk.js": "/kapstone-frontend/static/js/2.1a5cdbdb.chunk.js",
+    "static/js/2.1a5cdbdb.chunk.js.map": "/kapstone-frontend/static/js/2.1a5cdbdb.chunk.js.map",
     "index.html": "/kapstone-frontend/index.html",
     "static/css/main.523e682e.chunk.css.map": "/kapstone-frontend/static/css/main.523e682e.chunk.css.map",
-    "static/js/2.350fe77f.chunk.js.LICENSE.txt": "/kapstone-frontend/static/js/2.350fe77f.chunk.js.LICENSE.txt"
+    "static/js/2.1a5cdbdb.chunk.js.LICENSE.txt": "/kapstone-frontend/static/js/2.1a5cdbdb.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.66f0ecb1.js",
-    "static/js/2.350fe77f.chunk.js",
+    "static/js/2.1a5cdbdb.chunk.js",
     "static/css/main.523e682e.chunk.css",
-    "static/js/main.f86e9cbe.chunk.js"
+    "static/js/main.39372c16.chunk.js"
   ]
 }
