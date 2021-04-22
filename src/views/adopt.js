@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useStore, actions } from "../store/store";
 import { useHistory } from "react-router-dom";
 import KittyCard from "../components/kittyCard";
-
+import { getAllAuctionIds } from "../apis/fetchRequests";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,20 +27,17 @@ const useStyles = makeStyles((theme) => ({
 function AdoptionsPage(props) {
   const classes = useStyles();
 
-
   const [auctions, setAuctions] = useState([]);
 
   useEffect(() => {
     getAllAuctionIds().then((res) => {
       if (res.error) {
         console.log(res);
-      }
-      else {
+      } else {
         setAuctions(res);
       }
     });
   }, [setAuctions]);
-
 
   const [userDetails, setUserDetails] = useState({});
   return (
@@ -66,8 +63,6 @@ function AdoptionsPage(props) {
             Recently Adopted
           </Typography>
           <Grid item></Grid>
-
-          
         </Grid>
       </Container>
     </div>
