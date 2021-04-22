@@ -11,9 +11,7 @@ import AdoptionsPage from "./views/adopt";
 import UsersPage from "./views/usersPage";
 import ProfilePage from "./views/profilePage";
 import Shop from "./views/shop";
-import UserCard from "./components/userCard";
 import Settings from "./views/settings";
-import KittyCard from "./components/kittyCard";
 
 function App() {
   const history = useHistory();

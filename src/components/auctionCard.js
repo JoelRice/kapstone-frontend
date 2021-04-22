@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   Button,
-  useStyles,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useStore, actions } from "../store/store";

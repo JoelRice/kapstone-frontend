@@ -63,7 +63,7 @@ const ProductCard = (props) => {
 
   return (
     <Grid>
-      <Card>
+      <Card style={{ marginBottom: "10px" }}>
         <CardHeader>{productDisplayCategory}</CardHeader>
         {productDetails.pictureData ? (
           <CardMedia
