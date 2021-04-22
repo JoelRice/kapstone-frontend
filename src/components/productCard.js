@@ -14,9 +14,13 @@ import {
   CardHeader,
   CardMedia,
 } from "@material-ui/core";
-//import classes from '*.module.css';
+import { useHistory } from "react-router-dom";
+
+
 const ProductCard = (props) => {
   const { productName } = props;
+  const canBePurchased = props.hasOwnProperty("canBePurchased") ? props.canBePurchased : true;
+  const isButtonVisible = props.hasOwnProperty("canBePurchased");
   const productDisplayName = productName
     .split("-")
     .map((s) => s[0].toUpperCase() + s.slice(1))
@@ -28,6 +32,7 @@ const ProductCard = (props) => {
     : "";
   const token = useStore((state) => state.token);
   const dispatch = useStore((state) => state.dispatch);
+  const history = useHistory();
 
   useEffect(() => {
     getProductDetailsByName(productName).then((res) => {
@@ -61,6 +66,10 @@ const ProductCard = (props) => {
     });
   };
 
+  const handleInteract = (event) => {
+    history.push(`/use/${productName}`);
+  };
+
   return (
     <Grid>
       <Card style={{ marginBottom: "10px" }}>
@@ -85,14 +94,15 @@ const ProductCard = (props) => {
           </div>
         </CardContent>
         <CardActions disableSpacing>
-          <Button
+          { isButtonVisible ? (<Button
             color="primary"
             variant="contained"
             size="small"
-            onClick={handlePurchase}
+            onClick={canBePurchased ? handlePurchase : handleInteract}
           >
-            Purchase
-          </Button>
+            {canBePurchased ? "Purchase" : "Use" }
+          </Button>) : ""
+          }
         </CardActions>
       </Card>
     </Grid>

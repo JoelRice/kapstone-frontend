@@ -10,6 +10,7 @@ import Toast from "./views/toast";
 import AdoptionsPage from "./views/adopt";
 import UsersPage from "./views/usersPage";
 import ProfilePage from "./views/profilePage";
+import InteractPage from "./views/interactPage";
 import Shop from "./views/shop";
 import Settings from "./views/settings";
 
@@ -42,6 +43,7 @@ function App() {
           <Route component={UsersPage} path="/users" />
           <Route component={ProfilePage} path="/profile" />
           <Route exact path="/settings" component={Settings} />
+          <Route exact path="/use/:productName" component={InteractPage} />
           {/* Route to see other my profile  */}
         </Switch>
       </header>

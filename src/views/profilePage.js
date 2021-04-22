@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useStore } from "../store/store";
 import { getAccountInfo } from "../apis/fetchRequests";
 import KittyCard from "../components/kittyCard";
+import ProductCard from "../components/productCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -56,10 +57,10 @@ function ProfilePage(props) {
         >
           <Grid item>
             <br></br>
-            <Typography>Balance: {userDetails.balance || "0"}</Typography>
+            <Typography component="h4" variant="h4">Balance: {userDetails.balance || "0"}</Typography>
           </Grid>
           <Grid item>
-            <Typography>Kitties:</Typography>
+            <Typography component="h4" variant="h4">Kitties: {userDetails.pets?.length > 0 ? "" : "None, adopt some!"}</Typography>
             <Grid
               container
               direction="row"
@@ -74,16 +75,10 @@ function ProfilePage(props) {
             </Grid>
           </Grid>
           <Grid item>
-            <Typography>Items:</Typography>
-            <Grid>
+            <Typography component="h4" variant="h4">Items: {userDetails.inventory?.length > 0 ? "" : "None, buy some!"}</Typography>
+            <Grid container direction="row">
               {userDetails.inventory?.map((productName, i) => (
-                // Should be a ProductCard
-                <div key={i}>
-                  {productName
-                    .split("-")
-                    .map((s) => s[0].toUpperCase() + s.slice(1))
-                    .join(" ")}
-                </div>
+                <ProductCard canBePurchased={false} key={i} productName={productName} />
               ))}
             </Grid>
           </Grid>

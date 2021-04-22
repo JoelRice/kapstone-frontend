@@ -152,6 +152,23 @@ export const logoutRequest = (token) => {
 };
 
 ////Interactions endpoints////
+export const interactWithPet = (token, id, productName) => {
+  return fetch(`${baseURL}/interact`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      pet: id,
+      product: productName,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+};
 
 ////Pets endpoints////
 export const getAllPetIds = () =>
@@ -292,3 +309,4 @@ export const checkUser = (id) =>
     .then((res) => {
       return res;
     });
+
