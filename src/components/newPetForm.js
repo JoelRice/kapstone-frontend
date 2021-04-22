@@ -20,20 +20,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
   fileInput: {
-    position: "relative",
+    opacity: 0,
     zIndex: -2,
-    top: "-38px",
-    left: "-100px",
-    width: "100%",
-    '&::before': {
-      content: '"____________"',
-      color: "#43464d",
-      backgroundColor: "#43464d",
-      position: "relative",
-      left: "88px",
-      borderTop: "3px solid #43464d",
-      borderBottom: "3px solid #43464d",
-    }
+    position: "absolute",
   },
   textInput: {
     margin: theme.spacing(0.5),
