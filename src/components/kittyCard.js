@@ -8,7 +8,6 @@ import {
   Grid,
   Typography,
   Collapse,
-  IconButton,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -55,7 +54,15 @@ export default function KittyCard(props) {
         </Typography>
 
         <div className={classes.image}>
-          { catInfo.pictureData ? <CardMedia component="img" style={{height:"250px"}} src={catInfo.pictureData}/> : ""}
+          {catInfo.pictureData ? (
+            <CardMedia
+              component="img"
+              style={{ height: "250px" }}
+              src={catInfo.pictureData}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </CardContent>
 
@@ -76,7 +83,7 @@ export default function KittyCard(props) {
             <div>Cuddly: {catInfo.traits?.cuddly}</div>
             <div>Lazy: {catInfo.traits?.lazy}</div>
             <div>Hungry: {catInfo.traits?.hungry}</div>
-            <div>Tired: {catInfo.traits?.tired}</div>
+            <div>Playful: {catInfo.traits?.playful}</div>
             <div>Loyal: {catInfo.traits?.loyal}</div>
           </Typography>
 

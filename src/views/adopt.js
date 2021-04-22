@@ -1,14 +1,4 @@
-import {
-  Box,
-  Container,
-  Button,
-  TextField,
-  FormControlLabel,
-  Link,
-  Grid,
-  Typography,
-  Checkbox,
-} from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { getAllAuctionIds } from "../apis/fetchRequests";
 import { makeStyles } from "@material-ui/core/styles";
@@ -34,8 +24,7 @@ function AdoptionsPage(props) {
     getAllAuctionIds().then((res) => {
       if (res.error) {
         console.log(res);
-      }
-      else {
+      } else {
         setAuctions(res);
       }
     });
@@ -50,15 +39,12 @@ function AdoptionsPage(props) {
         Adoptable Kitties
       </Typography>
       <Container className={classes.container} component="main">
-        <Grid
-          container
-          direction="column"
-        >  
-          { 
-            auctions.map((auction) => (
-              <Grid key={auction} item><AuctionCard auctionId={auction} /></Grid>
-            ))
-          }
+        <Grid container direction="column">
+          {auctions.map((auction) => (
+            <Grid key={auction} item>
+              <AuctionCard auctionId={auction} />
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </div>

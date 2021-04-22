@@ -1,19 +1,10 @@
-import {
-  Container,
-  Typography,
-  Grid,
-  Box,
-  Card,
-  CardActions,
-  Button,
-  makeStyles,
-} from "@material-ui/core";
+import { Container, Typography, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useStore } from "../store/store";
 import UserCard from "../components/userCard";
 import { getAccountInfo } from "../apis/fetchRequests";
 import KittyCard from "../components/kittyCard";
+import { Height } from "@material-ui/icons";
 
 function ProfilePage(props) {
   const [userDetails, setUserDetails] = useState({});
@@ -30,9 +21,6 @@ function ProfilePage(props) {
   }, [token, setUserDetails]);
   return (
     <div className="profile-page">
-      <Typography component="h2" variant="h2" align="center">
-        {userDetails.username || "?"}'s Inventory
-      </Typography>
       <Container style={{ backgroundColor: "#cfe8fc" }}>
         <Grid
           container
@@ -42,6 +30,10 @@ function ProfilePage(props) {
           spacing={3}
         >
           <Grid item>
+            <Typography component="h2" variant="h2" alignCenter>
+              {userDetails.username || "?"}'s Inventory
+            </Typography>
+            <br></br>
             <Typography>Balance: {userDetails.balance || "0"}</Typography>
           </Grid>
           <Grid item>

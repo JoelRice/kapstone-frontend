@@ -1,18 +1,9 @@
-import {
-  Container,
-  Typography,
-  Grid,
-  Box,
-  Card,
-  CardActions,
-  Button,
-} from "@material-ui/core";
+import { Container, Typography, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { checkUser } from "../apis/fetchRequests";
 
 export default function UserCard(props) {
-  const history = useHistory();
   const { id } = props;
   const [userInfo, setUserInfo] = useState({});
 

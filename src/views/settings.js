@@ -3,13 +3,11 @@ import {
   Container,
   CssBaseline,
   Grid,
-  Input,
   TextField,
   Typography,
-  CardContent,
   makeStyles,
 } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { updateAccountInfo } from "../apis/fetchRequests";
 import { useStore, actions } from "../store/store";
 import { useHistory } from "react-router-dom";
@@ -92,7 +90,7 @@ export default function Settings(props) {
       component="main"
       maxWidth="lg"
       align="center"
-      style={{ backgroundColor: "#cfe8fc", height: "1000px", width: "900px" }}
+      style={{ backgroundColor: "#cfe8fc", height: "30vw", width: "900px" }}
     >
       <CssBaseline />
       <header className="header">

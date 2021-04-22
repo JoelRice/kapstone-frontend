@@ -76,7 +76,12 @@ export default function LoginPage() {
         component="main"
         style={{ backgroundColor: "#cfe8fc", height: "500px", width: "500px" }}
       >
-        <Typography className={classes.heading1} component="h1" variant="h2">
+        <Typography
+          className={classes.heading1}
+          component="h1"
+          variant="h2"
+          align="center"
+        >
           Log In
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleLogin}>
