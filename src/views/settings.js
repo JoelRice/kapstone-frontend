@@ -51,6 +51,12 @@ export default function Settings(props) {
   });
   const handleUpdateAccount = (event) => {
     event.preventDefault();
+    if (form.password === form.newPassword) {
+      dispatch({
+        type: actions.TOAST,
+        payload: { text: "Passwords can't match", color: "#EF3823" },
+      });
+    }
 
     updateAccountInfo(
       token,
