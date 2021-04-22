@@ -10,10 +10,9 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useStore, actions } from "../store/store";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { getAllAuctionIds } from "../apis/fetchRequests";
 import { makeStyles } from "@material-ui/core/styles";
-import KittyCard from "../components/kittyCard";
+import AuctionCard from "../components/auctionCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,8 +28,18 @@ const useStyles = makeStyles((theme) => ({
 
 function AdoptionsPage(props) {
   const classes = useStyles();
-  const history = useHistory();
-  const dispatch = useStore((state) => state.dispatch);
+  const [auctions, setAuctions] = useState([]);
+
+  useEffect(() => {
+    getAllAuctionIds().then((res) => {
+      if (res.error) {
+        console.log(res);
+      }
+      else {
+        setAuctions(res);
+      }
+    });
+  }, [setAuctions]);
 
   return (
     <div className={classes.root}>
@@ -42,14 +51,11 @@ function AdoptionsPage(props) {
           <Typography component="h2" variant="h4">
             Adoptable Kitties
           </Typography>
-          <Grid item></Grid>
-        </Grid>
-
-        <Grid container>
-          <Typography component="h2" variant="h4">
-            Recently Adopted
-          </Typography>
-          <Grid item></Grid>
+          { 
+            auctions.map((auction) => (
+              <Grid item><AuctionCard key={auction} id={auction} /></Grid>
+            ))
+          }
         </Grid>
       </Container>
     </div>
