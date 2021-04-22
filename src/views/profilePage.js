@@ -1,12 +1,30 @@
-import { Container, Typography, Grid } from "@material-ui/core";
+import { Container, Typography, Grid, makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useStore } from "../store/store";
-import UserCard from "../components/userCard";
 import { getAccountInfo } from "../apis/fetchRequests";
 import KittyCard from "../components/kittyCard";
-import { Height } from "@material-ui/icons";
+
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  container: {
+    width: "80vw",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 15,
+    backgroundColor: "#cfe8fc",
+    color: theme.palette.info.main,
+  },
+  container2: { backgroundColor: "#cfe8fc", width: "80vw" },
+  heading1: {
+    marginTop: theme.spacing(1),
+    paddingTop: theme.spacing(1),
+    color: theme.palette.info.main,
+  },
+}));
 
 function ProfilePage(props) {
+  const classes = useStyles();
   const [userDetails, setUserDetails] = useState({});
   const token = useStore((state) => state.token);
 
@@ -22,17 +40,21 @@ function ProfilePage(props) {
   return (
     <div className="profile-page">
       <Container style={{ backgroundColor: "#cfe8fc" }}>
+        <Typography
+          component="h2"
+          variant="h2"
+          align="center"
+          className={classes.heading1}
+        >
+          {userDetails.username || "?"}'s Inventory
+        </Typography>
         <Grid
           container
           direction="column"
           justify="space-evenly"
           alignItems="flex-start"
-          spacing={3}
         >
           <Grid item>
-            <Typography component="h2" variant="h2" alignCenter>
-              {userDetails.username || "?"}'s Inventory
-            </Typography>
             <br></br>
             <Typography>Balance: {userDetails.balance || "0"}</Typography>
           </Grid>

@@ -1,6 +1,5 @@
 import { Container, Typography, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { checkUser } from "../apis/fetchRequests";
 
 export default function UserCard(props) {
@@ -31,6 +30,7 @@ export default function UserCard(props) {
           </Grid>
           <Grid item>
             {/* Could be replaced with a kitty card for each one */}
+
             <Typography>Kitties: {userInfo.pets?.length || "0"}</Typography>
           </Grid>
         </Grid>
