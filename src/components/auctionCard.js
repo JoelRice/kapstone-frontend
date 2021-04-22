@@ -131,7 +131,7 @@ function AuctionCard(props) {
               flexFlow: "row nowrap",
               alignItems: "center",
               maxWidth: "315px",
-              margin: "4px",
+              marginTop: "2px",
             }}
           >
             <Typography>Bid to Beat: {highestBid}</Typography>

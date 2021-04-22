@@ -83,7 +83,7 @@ export default function KittyCard(props) {
             <div>Cuddly: {catInfo.traits?.cuddly}</div>
             <div>Lazy: {catInfo.traits?.lazy}</div>
             <div>Hungry: {catInfo.traits?.hungry}</div>
-            <div>Tired: {catInfo.traits?.tired}</div>
+            <div>Playful: {catInfo.traits?.playful}</div>
             <div>Loyal: {catInfo.traits?.loyal}</div>
           </Typography>
 

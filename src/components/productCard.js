@@ -85,7 +85,12 @@ const ProductCard = (props) => {
           </div>
         </CardContent>
         <CardActions disableSpacing>
-          <Button size="small" onClick={handlePurchase}>
+          <Button
+            color="primary"
+            variant="contained"
+            size="small"
+            onClick={handlePurchase}
+          >
             Purchase
           </Button>
         </CardActions>
