@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   CardActions,
+  CardMedia,
   Button,
   Grid,
   Typography,
@@ -12,7 +13,6 @@ import {
 import React, { useEffect, useState } from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { checkPet } from "../apis/fetchRequests";
-import Image from "material-ui-image";
 const useStyles = makeStyles({
   root: {
     width: 315,
@@ -55,7 +55,7 @@ export default function KittyCard(props) {
         </Typography>
 
         <div className={classes.image}>
-          <Image src={catInfo.pictureData || ""} />
+          { catInfo.pictureData ? <CardMedia component="img" style={{height:"250px"}} src={catInfo.pictureData}/> : ""}
         </div>
       </CardContent>
 
