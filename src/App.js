@@ -20,6 +20,7 @@ function App() {
   const token = useStore((state) => state.token);
   useEffect(() => {
     window.onbeforeunload = () => {
+      history.push("/");
       localStorage.setItem("lastVisit", history.location.pathname);
     };
     if (token !== null && history.location.pathname === "/") {
