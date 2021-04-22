@@ -19,9 +19,9 @@ function App() {
   const history = useHistory();
   const token = useStore((state) => state.token);
   useEffect(() => {
-    window.onbeforeunload = () => {
-      history.push("/");
+    window.onbeforeunload = (event) => {
       localStorage.setItem("lastVisit", history.location.pathname);
+      window.location.pathname = "/";
     };
     if (token !== null && history.location.pathname === "/") {
       history.push(localStorage.getItem("lastVisit"));

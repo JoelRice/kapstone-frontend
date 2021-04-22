@@ -30,7 +30,6 @@ const useStyles = makeStyles({
 });
 
 export default function KittyCard(props) {
-  console.log(props);
   const classes = useStyles();
 
   const [catInfo, setCatInfo] = useState({});
