@@ -1,15 +1,5 @@
-import {
-  Container,
-  Typography,
-  Grid,
-  Box,
-  Card,
-  CardActions,
-  Button,
-  makeStyles,
-} from "@material-ui/core";
+import { Container, Typography, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useStore } from "../store/store";
 import UserCard from "../components/userCard";
 import { getAccountInfo } from "../apis/fetchRequests";
@@ -33,6 +23,7 @@ function ProfilePage(props) {
       <Typography component="h2" variant="h2" align="center">
         {userDetails.username || "?"}'s Inventory
       </Typography>
+      <br></br>
       <Container style={{ backgroundColor: "#cfe8fc" }}>
         <Grid
           container
