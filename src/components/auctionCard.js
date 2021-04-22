@@ -1,12 +1,10 @@
 import {
   Container,
   Typography,
-  Grid,
-  Box,
+  Input,
   Card,
   CardContent,
   Button,
-  useStyles,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useStore, actions } from "../store/store";
@@ -127,22 +125,30 @@ function AuctionCard(props) {
           <Card
             variant="outlined"
             style={{
-              display: "flex",
               flexFlow: "row nowrap",
-              alignItems: "center",
               maxWidth: "315px",
-              marginTop: "2px",
+              maxHeight: "200px",
+              marginTop: "3px",
+              padding: "5px",
             }}
           >
-            <Typography>Bid to Beat: {highestBid}</Typography>
             <Typography>
-              <Typography>Your Current Bid:</Typography>
-              <input value={bid} onChange={updateBid} type="number" />
-              <Button onClick={submitBid} variant="contained" color="primary">
-                Place Bid
-              </Button>
+              <Typography align="center">Bid to Beat: {highestBid}</Typography>
+
+              <Typography align="center">Your Current Bid:</Typography>
+
+              <Typography align="center">
+                <Input value={bid} onChange={updateBid} type="number" />
+              </Typography>
+
+              <Typography align="center">Auction ends {timeLeft}</Typography>
+              <br></br>
+              <Typography align="center">
+                <Button onClick={submitBid} variant="contained" color="primary">
+                  Place Bid
+                </Button>
+              </Typography>
             </Typography>
-            <Typography>Auction ends {timeLeft}</Typography>
           </Card>
         </CardContent>
       </div>

@@ -36,32 +36,24 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   tabs: {
-    '& .MuiTabs-indicator': {
-      backgroundColor: '#eeeeff',
+    "& .MuiTabs-indicator": {
+      backgroundColor: "#eeeeff",
     },
-  }
+  },
 }));
 
-const PAGE_INDEXES = [
-  "/adoption",
-  "/shop",
-  "/signup",
-  "/login",
-  "/users",
-];
+const PAGE_INDEXES = ["/adoption", "/shop", "/signup", "/login", "/users"];
 
 export default function MenuHeader(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useStore((state) => state.dispatch);
   const token = useStore((state) => state.token);
-  //TODO: history will not work, we are using useHistory now
-  const { match, history } = props;
+  const { history } = props;
 
   const [selectedTab, setSelectedTab] = useState(() => {
     const start = PAGE_INDEXES.indexOf(history.location.pathname);
-    return (start >= 0) ? start : false;
+    return start >= 0 ? start : false;
   });
-  // const [selectedPage, setSelectedPage] = useState(page);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

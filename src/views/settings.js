@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   heading1: {
     marginTop: theme.spacing(2),
     paddingTop: theme.spacing(4),
-    color: "primary",
+    color: theme.palette.info.main,
     align: "center",
   },
   form: {

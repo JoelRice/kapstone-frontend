@@ -1,6 +1,5 @@
 //This is not our current baseURL. It is just here as a place holder.*needs updated with new API
 //baseURL will be https://subdued-fog-mouth.glitch.me for deployment
-//http://localhost:3001
 export const baseURL = "https://subdued-fog-mouth.glitch.me";
 
 //Login Fetch Request *needs updated with new API
