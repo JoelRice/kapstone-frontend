@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useStore, actions } from "../store/store";
 import { getAccountInfo, checkAuctions, bidOnAuction } from "../apis/fetchRequests";
+import KittyCard from "../components/kittyCard";
 
 const timeUntil = (dateStr) => {
   if (!dateStr) return;
@@ -34,10 +35,10 @@ function AuctionCard(props) {
   const [timeLeft, setTimeLeft] = useState();
   const token = useStore((state) => state.token);
   const dispatch = useStore((state) => state.dispatch);
-  const { id } = props;
+  const { auctionId } = props;
 
   const refreshAuction = () => {
-    checkAuctions(id).then((res) => {
+    checkAuctions(auctionId).then((res) => {
       if (res.error) {
         console.log(res);
       }
@@ -54,7 +55,7 @@ function AuctionCard(props) {
 
   const submitBid = () => {
     if (bid > highestBid && bid > currentBid) {
-      bidOnAuction(token, bid, id).then((res) => {
+      bidOnAuction(token, bid, auctionId).then((res) => {
         if (res.error) {
           dispatch({ type: actions.TOAST, payload: { text: res.error, color: 'red' } });
         }
@@ -70,7 +71,7 @@ function AuctionCard(props) {
     }
   };
 
-  useEffect(refreshAuction, [id, userId, setAuctionDetails]);
+  useEffect(refreshAuction, [auctionId, userId, setAuctionDetails]);
 
   useEffect(() => {
     getAccountInfo(token).then((account) => {
@@ -86,15 +87,17 @@ function AuctionCard(props) {
   }, [setTimeLeft, auctionDetails])
 
   return (
-    <div>
-      <div>{auctionDetails.pet}</div>{/* should be a kitty card */}
-      <div>Bid to Beat: {highestBid}</div>
+    <div style={{ display: "flex", flexFlow: "row nowrap", alignItems: "center"}}>
+      <KittyCard petId={auctionDetails.pet} />
       <div>
-        <label>Your Current Bid:</label>
-        <input value={bid} onChange={updateBid} type="number"/>
-        <button onClick={submitBid}>Place Bid</button>
+        <div>Bid to Beat: {highestBid}</div>
+        <div>
+          <label>Your Current Bid:</label>
+          <input value={bid} onChange={updateBid} type="number"/>
+          <button onClick={submitBid}>Place Bid</button>
+        </div>
+        <div>Auction ends {timeLeft}</div>
       </div>
-      <div>Auction ends {timeLeft}</div>
     </div>
   );
 }
