@@ -39,6 +39,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/delete" component={DeleteAccount} />
           <Route exact path="/adoption" component={AdoptionsPage} />
+          <Route exact path="/shop" component={Shop} />
           <Route component={UsersPage} path="/users" />
           <Route component={ProfilePage} path="/profile" />
           <Route exact path="/settings" component={Settings} />

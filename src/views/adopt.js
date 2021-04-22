@@ -6,9 +6,11 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+
 import { useStore, actions } from "../store/store";
 import { useHistory } from "react-router-dom";
 import KittyCard from "../components/kittyCard";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +27,21 @@ const useStyles = makeStyles((theme) => ({
 function AdoptionsPage(props) {
   const classes = useStyles();
 
+
+  const [auctions, setAuctions] = useState([]);
+
+  useEffect(() => {
+    getAllAuctionIds().then((res) => {
+      if (res.error) {
+        console.log(res);
+      }
+      else {
+        setAuctions(res);
+      }
+    });
+  }, [setAuctions]);
+
+
   const [userDetails, setUserDetails] = useState({});
   return (
     <div className={classes.root}>
@@ -36,6 +53,7 @@ function AdoptionsPage(props) {
           <Typography component="h2" variant="h4">
             Available for adoption
           </Typography>
+
           {userDetails.pets?.map((petId) => (
             // Should be a PetCard
             <KittyCard key={petId} petId={petId} />
@@ -48,6 +66,8 @@ function AdoptionsPage(props) {
             Recently Adopted
           </Typography>
           <Grid item></Grid>
+
+          
         </Grid>
       </Container>
     </div>

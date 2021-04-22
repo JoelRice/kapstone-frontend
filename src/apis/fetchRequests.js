@@ -38,7 +38,6 @@ export const checkAuctions = (id) =>
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       return res;
     });
 
