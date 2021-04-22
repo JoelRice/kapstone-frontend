@@ -36,6 +36,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/delete" component={DeleteAccount} />
           <Route exact path="/adoption" component={AdoptionsPage} />
+          <Route exact path="/shop" component={Shop} />
           <Route component={UsersPage} path="/users" />
           {/* Routes for the drop down menu, still need to add components */}
           <Route component={ProfilePage} path="/profile" />
