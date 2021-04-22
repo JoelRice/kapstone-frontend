@@ -53,7 +53,7 @@ export default function LoginPage() {
           payload: { text: res.error, color: "#EF3823" },
         });
       } else {
-        history.push("/");
+        history.push("/profile");
         dispatch({
           type: actions.TOAST,
           payload: { text: res.message, color: "#4BCC63" },

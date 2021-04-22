@@ -19,7 +19,7 @@ export const createAuction = (token, pet, endsAt) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       pet,
@@ -46,7 +46,7 @@ export const bidOnAuction = (token, amount, id) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       amount,
@@ -94,7 +94,7 @@ export const getAccountInfo = (token) =>
   fetch(`${baseURL}/auth/account`, {
     method: "GET",
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   })
     .then((res) => res.json())
@@ -107,7 +107,7 @@ export const updateAccountInfo = (token, password, newUsername, newPassword) =>
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       password,
@@ -125,7 +125,7 @@ export const deleteAccount = (token, password) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       password,
@@ -142,7 +142,7 @@ export const logoutRequest = (token) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   })
     .then((res) => res.json())
@@ -198,7 +198,7 @@ export const createPet = (
       fetch(`${baseURL}/admin/pet`, {
         method: "POST",
         body: formData,
-        headers: { "Authorization": `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
         .then((json) => resolve(json));
@@ -231,7 +231,7 @@ export const purchaseProductByName = (token, quantity, name) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       quantity,
@@ -264,7 +264,7 @@ export const createProduct = (
       fetch(`${baseURL}/admin/product`, {
         method: "POST",
         body: formData,
-        headers: { 'Authorization': `Bearer ${token}`, },
+        headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
         .then((json) => resolve(json));

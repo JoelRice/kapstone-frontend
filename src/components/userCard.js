@@ -15,7 +15,7 @@ export default function UserCard(props) {
   const history = useHistory();
   const { id } = props;
   const [userInfo, setUserInfo] = useState({});
-  
+
   useEffect(() => {
     checkUser(id).then((res) => {
       setUserInfo(res);
@@ -33,14 +33,14 @@ export default function UserCard(props) {
           spacing={3}
         >
           <Grid item>
-            <Typography>{userInfo.username || '?'}</Typography>
+            <Typography>{userInfo.username || "?"}</Typography>
           </Grid>
           <Grid item>
-            <Typography>Balance: {userInfo.balance || '0'}</Typography>
+            <Typography>Balance: {userInfo.balance || "0"}</Typography>
           </Grid>
           <Grid item>
             {/* Could be replaced with a kitty card for each one */}
-            <Typography>Kitties: {userInfo.pets?.length || '0'}</Typography>
+            <Typography>Kitties: {userInfo.pets?.length || "0"}</Typography>
           </Grid>
         </Grid>
       </Container>

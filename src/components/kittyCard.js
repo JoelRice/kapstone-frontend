@@ -1,21 +1,21 @@
+import {
+  makeStyles,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Grid,
+  Typography,
+  Collapse,
+  IconButton,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import { useStore } from "../store/store";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
-
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { checkPet } from "../apis/fetchRequests";
+import Image from "material-ui-image";
 const useStyles = makeStyles({
   root: {
-    maxWidth: 300,
+    width: 315,
   },
   title: {
     fontSize: 14,
@@ -23,84 +23,79 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-  image: {
-
-  },
+  image: {},
   button: {
     margin: 2,
   },
 });
 
-
-
-
 export default function KittyCard(props) {
-  const [image, name, breed, stats] = props;
+  console.log(props);
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
-  const [auctionTimer, setAuctionTimer] = useState(0);
 
+  const [catInfo, setCatInfo] = useState({});
+  const { petId } = props;
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    if (petId) {
+      checkPet(petId).then((res) => {
+        setCatInfo(res);
+      });
+    }
+  }, [setCatInfo, petId]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  const handleBidding = () => {
-    setExpanded(!expanded);
-  };
-
-  
-  return(
+  return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
+        <Typography variant="h4" component="h2" align="center">
+          {catInfo.name || " No Name Available"}
+        </Typography>
+
         <div className={classes.image}>
-            Here will go the image of the kitty 
+          <Image src={catInfo.pictureData || ""} />
         </div>
-        <Typography variant="h5" component="h2">
-          Here will go the Kitty name 
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          Here will go the kitty breed
-        </Typography>
-        <Typography variant="body2" component="p">
-          <Button 
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            onChange={handleBidding}
-            >
-              Bid Now
-          </Button>
-          <div className="auctionTimer">
-            Time Left {auctionTimer}
-          </div>
-        </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent className="kittyStats">
-          <Typography paragraph>Stats:</Typography>
-          <Typography paragraph>
-            -produces blank coins 
-            -needs blank amount of food
-            -favorite items (these will be things that can be purchased in the store)
+
+      <CardContent>
+        <Typography variant="h5" component="h2" align="center">
+          Cat Info
+        </Typography>
+        <ExpandMoreIcon onClick={handleExpandClick} />
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Typography variant="h5" component="h2" align="center">
+            Traits:
           </Typography>
-          <Typography paragraph>
-            Small story that effects nothing in the game
+          <Typography
+            className={classes.pos}
+            color="textPrimary"
+            align="center"
+          >
+            <div>Cuddly: {catInfo.traits?.cuddly}</div>
+            <div>Lazy: {catInfo.traits?.lazy}</div>
+            <div>Hungry: {catInfo.traits?.hungry}</div>
+            <div>Tired: {catInfo.traits?.tired}</div>
+            <div>Loyal: {catInfo.traits?.loyal}</div>
           </Typography>
-          <Typography>
-            Current Bid/Auction start time/time remaining 
+
+          <Typography variant="h5" component="h2" align="center">
+            Stats:
           </Typography>
-        </CardContent>
-      </Collapse>
-  </Card>
-  )
+
+          <Typography
+            className={classes.pos}
+            color="textPrimary"
+            align="center"
+          >
+            <div>Tired: {catInfo.stats?.tired}</div>
+            <div>Trusting: {catInfo.stats?.trusting}</div>
+          </Typography>
+        </Collapse>
+      </CardContent>
+      <CardActions disableSpacing></CardActions>
+    </Card>
+  );
 }
