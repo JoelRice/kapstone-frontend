@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#2196f3",
   },
   cardMargin: {
-    marginBottom: "5px",
+    padding: 15,
   },
 }));
 const Shop = () => {
@@ -45,6 +45,7 @@ const Shop = () => {
           direction="row"
           justify="space-evenly"
           align-items="flex-start"
+          className={classes.cardMargin}
         >
           <ProductList products={products} />
         </Grid>
