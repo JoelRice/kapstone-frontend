@@ -15,22 +15,14 @@ export default function UserCard(props) {
   return (
     <div className="users-page">
       <Container style={{ backgroundColor: "#cfe8fc" }}>
-        <Grid
-          container
-          direction="row"
-          justify="space-evenly"
-          alignItems="center"
-          spacing={3}
-        >
-          <Grid item>
+        <Grid container direction="row" justify="space-evenly" spacing={2}>
+          <Grid item alignItems="center" xs={3}>
             <Typography>{userInfo.username || "?"}</Typography>
           </Grid>
-          <Grid item>
+          <Grid item alignItems="center" xs={3}>
             <Typography>Balance: {userInfo.balance || "0"}</Typography>
           </Grid>
-          <Grid item>
-            {/* Could be replaced with a kitty card for each one */}
-
+          <Grid item alignItems="center" xs={3}>
             <Typography>Kitties: {userInfo.pets?.length || "0"}</Typography>
           </Grid>
         </Grid>
