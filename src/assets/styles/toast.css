@@ -1,5 +1,8 @@
 .toast {
-  position: absolute;
+  padding: 2px 0 0 12px;
+  position: -webkit-sticky;
+  position: sticky;
+
   z-index: 500;
   width: 60vw;
   height: 15vh;
