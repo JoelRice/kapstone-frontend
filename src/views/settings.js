@@ -88,61 +88,66 @@ export default function Settings(props) {
   return (
     <Container
       component="main"
-      maxWidth="lg"
       align="center"
-      style={{ backgroundColor: "#cfe8fc", height: "30vw", width: "900px" }}
+      style={{ backgroundColor: "#cfe8fc", height: "550px", width: "900px" }}
     >
-      <CssBaseline />
-      <header className="header">
-        <Typography className={classes.heading1} component="h1" variant="h2">
-          Settings
-        </Typography>
-      </header>
-      <Grid container component="main" className={classes.root}>
-        <form className="form" onSubmit={handleUpdateAccount}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            label="Update Username"
-            value={form.username}
-            onChange={handleFormChange}
-            name="newUsername"
-          />
-
-          <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            required
-            label="Current Password"
-            value={form.password}
-            name="password"
-            onChange={handleFormChange}
-            autoCapitalize="none"
-            type="password"
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            label="New Password"
-            name="newPassword"
-            value={form.newPassword}
-            onChange={handleFormChange}
-            autoCapitalize="none"
-            type="password"
-          />
-          <Button
-            type="submit"
-            size="lg"
-            variant="contained"
-            color="primary"
-            className="submit"
+      <Grid align="center">
+        <header className="header">
+          <Typography
+            align="center"
+            className={classes.heading1}
+            component="h1"
+            variant="h2"
           >
-            Submit
-          </Button>
-        </form>
+            Settings
+          </Typography>
+        </header>
+        <Grid container component="main" align="center">
+          <form className={classes.form} onSubmit={handleUpdateAccount}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="Update Username"
+              value={form.username}
+              onChange={handleFormChange}
+              name="newUsername"
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              required
+              label="Current Password"
+              value={form.password}
+              name="password"
+              onChange={handleFormChange}
+              autoCapitalize="none"
+              type="password"
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="New Password"
+              name="newPassword"
+              value={form.newPassword}
+              onChange={handleFormChange}
+              autoCapitalize="none"
+              type="password"
+            />
+            <Button
+              type="submit"
+              size="lg"
+              variant="contained"
+              color="primary"
+              className="submit"
+            >
+              Submit
+            </Button>
+          </form>
+        </Grid>
       </Grid>
     </Container>
   );
