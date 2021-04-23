@@ -3,12 +3,13 @@ import { Grid, Container, Typography } from "@material-ui/core";
 import ProductList from "../components/productList";
 import { getAllProductNames } from "../apis/fetchRequests";
 import { makeStyles } from "@material-ui/styles";
+
 const useStyles = makeStyles((theme) => ({
   typographyStyle: {
     color: "#2196f3",
   },
   cardMargin: {
-    padding: 15,
+    padding: 20,
   },
 }));
 const Shop = () => {
