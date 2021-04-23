@@ -33,23 +33,22 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Toast />
-        <Route component={MenuHeader} path="/" />
-        <Switch>
-          <Route exact path="/admin" component={Admin} />
-          <Route exact path="/signup" component={SignUpPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/delete" component={DeleteAccount} />
-          <Route exact path="/adoption" component={AdoptionsPage} />
-          <Route exact path="/shop" component={Shop} />
-          <Route component={UsersPage} path="/users" />
-          <Route component={ProfilePage} path="/profile" />
-          <Route exact path="/settings" component={Settings} />
-          <Route exact path="/use/:productName" component={InteractPage} />
-          {/* Route to see other my profile  */}
-        </Switch>
-      </header>
+      <header className="App-header"></header>
+      <Route component={MenuHeader} path="/" />
+      <Switch>
+        <Route exact path="/admin" component={Admin} />
+        <Route exact path="/signup" component={SignUpPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/delete" component={DeleteAccount} />
+        <Route exact path="/adoption" component={AdoptionsPage} />
+        <Route exact path="/shop" component={Shop} />
+        <Route component={UsersPage} path="/users" />
+        <Route component={ProfilePage} path="/profile" />
+        <Route exact path="/settings" component={Settings} />
+        <Route exact path="/use/:productName" component={InteractPage} />
+        {/* Route to see other my profile  */}
+      </Switch>
+      <Toast />
     </div>
   );
 }
