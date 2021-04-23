@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useStore } from "../store/store";
 import { getAccountInfo } from "../apis/fetchRequests";
 import KittyCard from "../components/kittyCard";
+import ProductCard from "../components/productCard";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
   container: {
     width: "80vw",
     display: "flex",
@@ -19,8 +19,10 @@ const useStyles = makeStyles((theme) => ({
   heading1: {
     marginTop: theme.spacing(1),
     paddingTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
     color: theme.palette.info.main,
   },
+  catStyles: { margin: 12 },
 }));
 
 function ProfilePage(props) {
@@ -48,45 +50,61 @@ function ProfilePage(props) {
         >
           {userDetails.username || "?"}'s Inventory
         </Typography>
+        <Typography component="h4" variant="h4" align="right">
+          Balance: {userDetails.balance || "0"}
+        </Typography>
+        <Grid align="center">
+          <br></br>
+          <Typography
+            component="h4"
+            variant="h4"
+            align="center"
+            className={classes.catStyles}
+          >
+            Kitties: {userDetails.pets?.length > 0 ? "" : "None, adopt some!"}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Grid
+            container
+            direction="row"
+            justify="space-evenly"
+            alignItems="flex-start"
+            spacing={11}
+          >
+            {userDetails.pets?.map((petId) => (
+              // Should be a PetCard
+              <KittyCard
+                key={petId}
+                petId={petId}
+                className={classes.catStyles}
+              />
+            ))}
+          </Grid>
+        </Grid>
+
+        <Typography
+          component="h4"
+          variant="h4"
+          align="center"
+          className={classes.catStyles}
+        >
+          Items: {userDetails.inventory?.length > 0 ? "" : "None, buy some!"}
+        </Typography>
         <Grid
           container
-          direction="column"
+          direction="row"
           justify="space-evenly"
           alignItems="flex-start"
+          spacing={11}
         >
-          <Grid item>
-            <br></br>
-            <Typography>Balance: {userDetails.balance || "0"}</Typography>
-          </Grid>
-          <Grid item>
-            <Typography>Kitties:</Typography>
-            <Grid
-              container
-              direction="row"
-              justify="space-evenly"
-              alignItems="flex-start"
-              spacing={11}
-            >
-              {userDetails.pets?.map((petId) => (
-                // Should be a PetCard
-                <KittyCard key={petId} petId={petId} />
-              ))}
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Typography>Items:</Typography>
-            <Grid>
-              {userDetails.inventory?.map((productName, i) => (
-                // Should be a ProductCard
-                <div key={i}>
-                  {productName
-                    .split("-")
-                    .map((s) => s[0].toUpperCase() + s.slice(1))
-                    .join(" ")}
-                </div>
-              ))}
-            </Grid>
-          </Grid>
+          {userDetails.inventory?.map((productName, i) => (
+            <ProductCard
+              canBePurchased={false}
+              key={i}
+              productName={productName}
+            />
+          ))}
         </Grid>
       </Container>
     </div>

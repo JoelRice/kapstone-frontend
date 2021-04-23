@@ -1,5 +1,6 @@
 //This is not our current baseURL. It is just here as a place holder.*needs updated with new API
 //baseURL will be https://subdued-fog-mouth.glitch.me for deployment
+//baseURL for testing http://localhost:3001
 export const baseURL = "https://subdued-fog-mouth.glitch.me";
 
 //Login Fetch Request *needs updated with new API
@@ -152,6 +153,23 @@ export const logoutRequest = (token) => {
 };
 
 ////Interactions endpoints////
+export const interactWithPet = (token, id, productName) => {
+  return fetch(`${baseURL}/interact`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      pet: id,
+      product: productName,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return res;
+    });
+};
 
 ////Pets endpoints////
 export const getAllPetIds = () =>
