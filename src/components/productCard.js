@@ -16,10 +16,11 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
-
 const ProductCard = (props) => {
   const { productName } = props;
-  const canBePurchased = props.hasOwnProperty("canBePurchased") ? props.canBePurchased : true;
+  const canBePurchased = props.hasOwnProperty("canBePurchased")
+    ? props.canBePurchased
+    : true;
   const isButtonVisible = props.hasOwnProperty("canBePurchased");
   const productDisplayName = productName
     .split("-")
@@ -93,16 +94,19 @@ const ProductCard = (props) => {
             </Typography>
           </div>
         </CardContent>
-        <CardActions disableSpacing>
-          { isButtonVisible ? (<Button
-            color="primary"
-            variant="contained"
-            size="small"
-            onClick={canBePurchased ? handlePurchase : handleInteract}
-          >
-            {canBePurchased ? "Purchase" : "Use" }
-          </Button>) : ""
-          }
+        <CardActions disableSpacing align="center">
+          {isButtonVisible ? (
+            <Button
+              color="primary"
+              variant="contained"
+              size="small"
+              onClick={canBePurchased ? handlePurchase : handleInteract}
+            >
+              {canBePurchased ? "Purchase" : "Use"}
+            </Button>
+          ) : (
+            ""
+          )}
         </CardActions>
       </Card>
     </Grid>

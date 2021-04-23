@@ -18,6 +18,9 @@ function App() {
   const history = useHistory();
   const token = useStore((state) => state.token);
   useEffect(() => {
+    window.showAdmin = () => {
+      history.push("/admin");
+    };
     window.onbeforeunload = (event) => {
       localStorage.setItem("lastVisit", history.location.pathname);
       window.location.pathname = "/";

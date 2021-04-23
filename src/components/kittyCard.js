@@ -20,9 +20,9 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-  image: {},
+  image: { marginBottom: 2 },
   button: {
-    margin: 2,
+    margin: 3,
   },
 });
 
@@ -47,7 +47,12 @@ export default function KittyCard(props) {
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Typography variant="h4" component="h2" align="center">
+        <Typography
+          variant="h4"
+          component="h2"
+          align="center"
+          className={classes.image}
+        >
           {catInfo.name || " No Name Available"}
         </Typography>
 
